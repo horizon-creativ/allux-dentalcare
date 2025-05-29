@@ -430,8 +430,8 @@
             theme: 'bootstrap4',
             placeholder: 'Pilih opsi',
             allowClear: true,
-            containerCssClass: 'rounded-0',
-            selectionCssClass: 'rounded-0'
+            // containerCssClass: 'rounded-0',
+            // selectionCssClass: 'rounded-0'
         });
         $('.select2bs4-clear').one('select2:open', function(e) {
             $('input.select2-search__field').prop('placeholder', 'Cari...');
@@ -441,8 +441,8 @@
             theme: 'bootstrap4',
             placeholder: 'Pilih opsi',
             allowClear: false,
-            containerCssClass: 'rounded-0',
-            selectionCssClass: 'rounded-0'
+            // containerCssClass: 'rounded-0',
+            // selectionCssClass: 'rounded-0'
         });
         $('.select2bs4').one('select2:open', function(e) {
             $('input.select2-search__field').prop('placeholder', 'Cari...');

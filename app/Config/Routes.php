@@ -12,6 +12,9 @@ $routes->group('backoffice', function ($routes) {
     $routes->get('/', 'Backoffice\Dashboard::index');
     // User
     $routes->get('user', 'Backoffice\User::index');
+    $routes->post('user', 'Backoffice\User::create');
+    $routes->patch('user', 'Backoffice\User::update');
+    $routes->delete('user', 'Backoffice\User::delete');
 });
 
 $routes->group('bo-auth', function ($routes) {

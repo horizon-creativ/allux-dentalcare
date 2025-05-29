@@ -26,7 +26,7 @@
             <!-- Main row -->
             <div class="row">
                 <div class="col-12">
-                    <div class="card rounded-0">
+                    <div class="card">
                         <div class="card-header">
                             <a href="#" class="btn bg-teal float-right" data-toggle="modal" data-target="#add-modal" title="Tambah Data"><i class="fas fa-plus"></i>&nbsp; <b>Tambah Data</b></a>
                         </div>
@@ -54,14 +54,16 @@
                                                 <td><?= $user['phone_user'] ?></td>
                                                 <td><?= $user['level_user'] ?></td>
                                                 <td>
-                                                    <a href="#" data-toggle="modal" data-target="#edit-modal<?= $user['id_user'] ?>" class="btn bg-teal btn-flat" title="Edit"><i class="fas fa-edit"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#delete-modal<?= $user['id_user'] ?>" class="btn bg-danger btn-flat" title="Hapus"><i class="fas fa-trash"></i></a>
+                                                    <?php if ($user['id_user'] != session('id_user')): ?>
+                                                        <a href="#" data-toggle="modal" data-target="#edit-modal<?= $user['id_user'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
+                                                        <a href="#" data-toggle="modal" data-target="#delete-modal<?= $user['id_user'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                             <!-- Modal Delete -->
                                             <div class="modal fade" id="delete-modal<?= $user['id_user'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered">
-                                                    <div class="modal-content rounded-0">
+                                                    <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle text-danger"></i></h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -69,15 +71,16 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah anda yakin akan menghapus data?</p>
+                                                            <p>Apakah anda yakin akan menghapus data <?= $title ?>?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="/user/<?= $user['id_user'] ?>" method="post" class="d-inline">
+                                                            <form action="/backoffice/user" method="post" class="d-inline">
                                                                 <?= csrf_field() ?>
+                                                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
                                                                 <input type="hidden" name="_method" value="DELETE">
-                                                                <button type="submit" class="btn bg-danger btn-flat">Ya, Hapus</button>
+                                                                <button type="submit" class="btn bg-danger">Ya, Hapus</button>
                                                             </form>
-                                                            <button type="button" class="btn btn-secondary btn-flat" data-dismiss="modal">Tidak</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
 
                                                         </div>
                                                     </div>
@@ -86,14 +89,17 @@
                                             <!-- Modal Edit -->
                                             <div class="modal fade" id="edit-modal<?= $user['id_user'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
-                                                    <div class="modal-content rounded-0">
+                                                    <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Satuan</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit <?= $title ?></h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="/user/<?= $user['id_user'] ?>" method="post">
+                                                        <form action="/backoffice/user" method="post">
+                                                            <!-- Hidden Form untuk merubah method menjadi PATCH -->
+                                                            <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                                            <input type="hidden" name="_method" value="PATCH">
                                                             <?= csrf_field() ?>
                                                             <div class="modal-body">
                                                                 <?php if (session()->getFlashdata('failed')) : ?>
@@ -103,20 +109,48 @@
                                                                 <?php endif; ?>
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                        <input type="hidden" name="_method" value="PATCH">
                                                                         <div class="form-group">
                                                                             <label for="name_user" class="col-form-label">Nama</label>
-                                                                            <input type="text" name="name_user" id="name_user" class="form-control rounded-0 <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= $user['name_user'] ?>">
+                                                                            <input type="text" name="name_user" id="name_user" class="form-control <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= $user['name_user'] ?>">
                                                                             <!-- Validation Error Msg -->
                                                                             <div id="name_user_error" class="invalid-feedback">
                                                                                 <?= validation_show_error('name_user') ?>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="email_user" class="col-form-label">Email</label>
+                                                                            <input type="text" name="email_user" id="email_user" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" value="<?= $user['email_user'] ?>">
+                                                                            <!-- Validation Error Msg -->
+                                                                            <div id="email_user_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('email_user') ?>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="phone_user" class="col-form-label">No. Telp</label>
+                                                                            <input type="text" name="phone_user" id="phone_user" class="form-control <?= (validation_show_error('phone_user')) ? 'is-invalid' : '' ?>" value="<?= $user['phone_user'] ?>">
+                                                                            <!-- Validation Error Msg -->
+                                                                            <div id="phone_user_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('phone_user') ?>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="level_user" class="col-form-label">Level</label>
+                                                                            <select name="level_user" id="" class="form-control select2bs4 <?= (validation_show_error('level_user')) ? 'is-invalid' : '' ?>">
+                                                                                <option></option>
+                                                                                <option value="Kasir" <?= $user['level_user'] == 'Kasir' ? 'selected' : '' ?>>Kasir</option>
+                                                                                <option value="Dokter" <?= $user['level_user'] == 'Dokter' ? 'selected' : '' ?>>Dokter</option>
+                                                                                <option value="Superadmin" <?= $user['level_user'] == 'Superadmin' ? 'selected' : '' ?>>Superadmin</option>
+                                                                            </select>
+                                                                            <!-- Validation Error Msg -->
+                                                                            <div id="level_user_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('level_user') ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn bg-teal btn-flat">Simpan</button>
+                                                                <button type="submit" class="btn bg-teal">Simpan</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -139,14 +173,14 @@
 <!-- Add Modal -->
 <div class="modal fade" id="add-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content rounded-0">
+        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Satuan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/user" method="post">
+            <form action="/backoffice/user" method="post">
                 <div class="modal-body">
                     <?php if (session()->getFlashdata('failed')) : ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -160,17 +194,54 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="name_user" class="col-form-label">Nama</label>
-                                <input type="text" name="name_user" id="name_user" class="form-control rounded-0 <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= old('name_user') ?>">
+                                <input type="text" name="name_user" id="name_user" class="form-control <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= old('name_user') ?>">
                                 <!-- Validation Error Msg -->
                                 <div id="name_user_error" class="invalid-feedback">
                                     <?= validation_show_error('name_user') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_user" class="col-form-label">Email</label>
+                                <input type="text" name="email_user" id="email_user" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" value="<?= old('email_user') ?>">
+                                <!-- Validation Error Msg -->
+                                <div id="email_user_error" class="invalid-feedback">
+                                    <?= validation_show_error('email_user') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password_user" class="col-form-label">Password</label>
+                                <input type="password" name="password_user" id="password_user" class="form-control <?= (validation_show_error('password_user')) ? 'is-invalid' : '' ?>" value="<?= old('password_user') ?>">
+                                <!-- Validation Error Msg -->
+                                <div id="password_user_error" class="invalid-feedback">
+                                    <?= validation_show_error('password_user') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_user" class="col-form-label">No. Telp</label>
+                                <input type="text" name="phone_user" id="phone_user" class="form-control <?= (validation_show_error('phone_user')) ? 'is-invalid' : '' ?>" value="<?= old('phone_user') ?>">
+                                <!-- Validation Error Msg -->
+                                <div id="phone_user_error" class="invalid-feedback">
+                                    <?= validation_show_error('phone_user') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="level_user" class="col-form-label">Level</label>
+                                <select name="level_user" id="" class="form-control select2bs4 <?= (validation_show_error('level_user')) ? 'is-invalid' : '' ?>">
+                                    <option></option>
+                                    <option value="Kasir" <?= old('level_user') == 'Kasir' ? 'selected' : '' ?>>Kasir</option>
+                                    <option value="Dokter" <?= old('level_user') == 'Dokter' ? 'selected' : '' ?>>Dokter</option>
+                                    <option value="Superadmin" <?= old('level_user') == 'Superadmin' ? 'selected' : '' ?>>Superadmin</option>
+                                </select>
+                                <!-- Validation Error Msg -->
+                                <div id="level_user_error" class="invalid-feedback">
+                                    <?= validation_show_error('level_user') ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn bg-teal btn-flat">Simpan</button>
+                    <button type="submit" class="btn bg-teal">Simpan</button>
                 </div>
             </form>
         </div>
