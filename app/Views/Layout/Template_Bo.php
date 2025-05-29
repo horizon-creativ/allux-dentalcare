@@ -267,9 +267,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/unit" class="nav-link <?= $menu == 'Unit' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-weight nav-icon"></i>
-                                        <p>Satuan</p>
+                                    <a href="/backoffice/obat" class="nav-link <?= $menu == 'Obat' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-pills nav-icon"></i>
+                                        <p>Obat</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
