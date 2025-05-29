@@ -94,7 +94,7 @@ class User extends BaseController
             return redirect()->to('/backoffice/user')->withInput();
         } else {
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/backoffice/user')->withInput();
+            return redirect()->to('/backoffice/user');
         }
     }
 

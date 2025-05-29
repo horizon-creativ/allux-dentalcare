@@ -261,9 +261,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/category" class="nav-link <?= $menu == 'Category' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-layer-group nav-icon"></i>
-                                        <p>Kategori</p>
+                                    <a href="/backoffice/layanan" class="nav-link <?= $menu == 'Layanan' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-user-md nav-icon"></i>
+                                        <p>Layanan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
