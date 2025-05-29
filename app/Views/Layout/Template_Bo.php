@@ -272,18 +272,6 @@
                                         <p>Obat</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="/supplier" class="nav-link <?= $menu == 'Supplier' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-truck nav-icon"></i>
-                                        <p>Supplier</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/customer" class="nav-link <?= $menu == 'Customer' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-user-tag nav-icon"></i>
-                                        <p>Pelanggan</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item <?= $menuGroup == 'Data' ? 'menu-open' : '' ?>">
@@ -297,9 +285,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/product" class="nav-link <?= $menu == 'Product' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-tag nav-icon"></i>
-                                        <p>Produk</p>
+                                    <a href="/backoffice/jadwal" class="nav-link <?= $menu == 'Jadwal' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-calendar-alt nav-icon"></i>
+                                        <p>Jadwal</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/backoffice/pasien" class="nav-link <?= $menu == 'Pasien' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-user-alt nav-icon"></i>
+                                        <p>Pasien</p>
                                     </a>
                                 </li>
                             </ul>
