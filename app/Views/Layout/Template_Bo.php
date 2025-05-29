@@ -394,6 +394,12 @@
 
     <!-- Custom Script -->
     <script>
+        // Input Mask
+        //time dd/mm/yyyy
+        // $('#datetime').inputmask('HH:MM', {
+        //     'placeholder': 'hh:mm'
+        // })
+        $('[data-mask]').inputmask()
         // DataTable
         $("#table-button").DataTable({
             "responsive": true,
