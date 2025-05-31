@@ -5,7 +5,7 @@
     <div class="container">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Profile</h1>
@@ -17,7 +17,7 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div> -->
         </section>
 
         <!-- Main content -->
@@ -25,19 +25,18 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
-
                         <!-- Profile Image -->
-                        <div class="card card-primary card-outline">
+                        <div class="card card-teal card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="../../dist/img/user4-128x128.jpg"
+                                        src="/uploads/img_user/<?= $user['img_user'] ?>"
                                         alt="User profile picture">
                                 </div>
 
-                                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                                <h3 class="profile-username text-center"><?= $user['name_user'] ?></h3>
 
-                                <p class="text-muted text-center">Software Engineer</p>
+                                <p class="text-muted text-center"><?= $user['level_user'] ?></p>
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
@@ -51,14 +50,14 @@
                                     </li>
                                 </ul>
 
-                                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                <a href="#" class="btn bg-teal btn-block rounded-pill"><b>Follow</b></a>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
 
                         <!-- About Me Box -->
-                        <div class="card card-primary">
+                        <div class="card card-teal">
                             <div class="card-header">
                                 <h3 class="card-title">About Me</h3>
                             </div>
@@ -104,7 +103,7 @@
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>
+                                        <a class="nav-link bg-teal" href="#activity" data-toggle="tab">Activity</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
@@ -117,7 +116,7 @@
                                         <!-- Post -->
                                         <div class="post">
                                             <div class="user-block">
-                                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                                                <img class="img-circle img-bordered-sm" src="/assets/dist/img/user1-128x128.jpg" alt="user image">
                                                 <span class="username">
                                                     <a href="#">Jonathan Burke Jr.</a>
                                                     <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>

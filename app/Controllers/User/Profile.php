@@ -17,7 +17,14 @@ class Profile extends BaseController
 
     public function index()
     {
+        if (!session('logged_in_user')) {
+            return redirect()->to('/');
+        }
+
         $data['title'] = 'Profil';
+
+        // Ambil data user berdasarkan id yang ada di session
+        $data['user'] = $this->userModel->where('id_user', session('id_user'))->first();
 
         return view('User/Profile/Index', $data);
     }

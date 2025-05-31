@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
                 <a href="/assets/index3.html" class="navbar-brand">
-                    <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: 1">
+                    <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: 1">
                     <span class="brand-text font-weight-light">Allux Dental Care</span>
                 </a>
 
@@ -115,12 +115,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer bg-dark">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <a href="/" class="text-dark text-bold">
-                            <h1>Allux Dental Care</h1>
+                            <!-- <h1>Allux Dental Care</h1> -->
+                            <img src="/img/logo.png" alt="" class="img-fluid" width="150">
                         </a>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
@@ -134,14 +135,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-4 mx-auto">
                         <h3 class="text-bold">Lokasi</h3>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3951.430026976419!2d112.61759027934569!3d-7.954434399999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629fe9a7a77e3%3A0x16850452a0c6966a!2sPraktek%20Dokter%20Gigi%20Malang%20-%20Allux%20Dental%20Care!5e0!3m2!1sid!2sid!4v1747835995938!5m2!1sid!2sid" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="row d-flex">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3951.430026976419!2d112.61759027934569!3d-7.954434399999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629fe9a7a77e3%3A0x16850452a0c6966a!2sPraktek%20Dokter%20Gigi%20Malang%20-%20Allux%20Dental%20Care!5e0!3m2!1sid!2sid!4v1747835995938!5m2!1sid!2sid" style="border:0;position: relative; height: 100%; width: 100%;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container mt-3">
                 <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
-                    Anything you want
+                    <a href="#">Terms and Condition</a> and <a href="#">Privacy Policy</a>
                 </div>
                 <!-- Default to the left -->
                 <strong>Copyright &copy; 2025 <a href="https://adminlte.io">Allux Dental Care</a>.</strong> All rights reserved.
