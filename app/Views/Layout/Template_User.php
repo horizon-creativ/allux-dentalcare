@@ -53,66 +53,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <!-- Messages Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-comments"></i>
-                            <span class="badge badge-danger navbar-badge">3</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
-                                <!-- Message Start -->
-                                <div class="media">
-                                    <img src="/assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                    <div class="media-body">
-                                        <h3 class="dropdown-item-title">
-                                            Brad Diesel
-                                            <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                        </h3>
-                                        <p class="text-sm">Call me whenever you can...</p>
-                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                    </div>
-                                </div>
-                                <!-- Message End -->
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <!-- Message Start -->
-                                <div class="media">
-                                    <img src="/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                    <div class="media-body">
-                                        <h3 class="dropdown-item-title">
-                                            John Pierce
-                                            <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                        </h3>
-                                        <p class="text-sm">I got your message bro</p>
-                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                    </div>
-                                </div>
-                                <!-- Message End -->
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <!-- Message Start -->
-                                <div class="media">
-                                    <img src="/assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                    <div class="media-body">
-                                        <h3 class="dropdown-item-title">
-                                            Nora Silvester
-                                            <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                        </h3>
-                                        <p class="text-sm">The subject goes here</p>
-                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                    </div>
-                                </div>
-                                <!-- Message End -->
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                        </div>
-                    </li>
                     <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge">15</span>
@@ -137,15 +79,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                         </div>
-                    </li>
+                    </li> -->
                     <!-- Account Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fas fa-user"></i></a>
-                        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                            <li><a href="#" class="dropdown-item">Some action </a></li>
-                            <li><a href="#" class="dropdown-item">Some other action</a></li>
-                        </ul>
-                    </li>
+                    <?php if (session('logged_in_user')): ?>
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fas fa-user"></i></a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="/profile" class="dropdown-item">Profil</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (!session('logged_in_user')): ?>
+                        <li class="nav-item">
+                            <a href="/login" class="btn bg-teal rounded-pill px-3 py-1">Login</a>
+                        </li>
+                    <?php endif; ?>
                     <!-- <li class="nav-item">
                         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                             <i class="fas fa-th-large"></i>
@@ -210,6 +160,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/assets/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/assets/dist/js/demo.js"></script>
+
+    <!-- Script -->
+    <script>
+        // Toast Success
+        window.onload = function() {
+            let FLASHDATA_SUCCESS = "<?= session()->getFlashdata('success') ?>"
+            let FLASHDATA_FAILED = "<?= session()->getFlashdata('failed') ?>"
+
+            if (FLASHDATA_SUCCESS) {
+                $(document).Toasts('create', {
+                    class: 'bg-success m-3',
+                    title: 'Success',
+                    autohide: true,
+                    delay: 5000,
+                    body: FLASHDATA_SUCCESS,
+                    icon: 'fas fa-check-circle fa-lg',
+                })
+            } else if (FLASHDATA_FAILED) {
+                $(document).Toasts('create', {
+                    class: 'bg-danger m-3',
+                    title: 'Failed',
+                    autohide: true,
+                    delay: 5000,
+                    body: FLASHDATA_FAILED,
+                    icon: 'fas fa-exclamation-triangle fa-lg',
+                })
+            }
+        }
+    </script>
 </body>
 
 </html>

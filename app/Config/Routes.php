@@ -5,7 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->group('', function ($routes) {
+    $routes->get('/', 'Home::index');
+    // Authentication
+    $routes->get('login', 'User\Auth::login');
+    $routes->get('register', 'User\Auth::register');
+    $routes->post('login/validate', 'User\Auth::loginValidate');
+    $routes->post('register/validate', 'User\Auth::registerValidate');
+    $routes->get('logout', 'User\Auth::logout');
+    // Profil
+    $routes->get('/profile', 'User\Profile::index');
+});
 
 $routes->group('backoffice', function ($routes) {
     // Dashboard

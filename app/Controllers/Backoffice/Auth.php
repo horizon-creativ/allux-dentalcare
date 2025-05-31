@@ -69,6 +69,7 @@ class Auth extends BaseController
                     session()->set('name_user', $user['name_user']);
                     session()->set('level_user', $user['level_user']);
 
+                    session()->setFlashdata('success', 'Selamat datang ' . $user['name_user']);
                     return redirect()->to('/backoffice')->withInput();
                 }
             }
