@@ -14,7 +14,12 @@ $routes->group('', function ($routes) {
     $routes->post('register/validate', 'User\Auth::registerValidate');
     $routes->get('logout', 'User\Auth::logout');
     // Profil
-    $routes->get('/profile', 'User\Profile::index');
+    $routes->get('profile', 'User\Profile::index');
+    // Booking
+    $routes->get('booking/date', 'User\Booking::date');
+    $routes->get('booking/slot', 'User\Booking::slot');
+    $routes->get('booking/layanan', 'User\Booking::layanan');
+    $routes->post('booking/save', 'User\Booking::save');
 });
 
 $routes->group('backoffice', function ($routes) {

@@ -12,10 +12,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/assets/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- jQuery -->
+    <!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -46,7 +76,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">Testimoni</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="btn bg-teal rounded-pill px-3">Booking</a>
+                            <?php if (!session('logged_in_user')): ?>
+                                <a href="/login" class="btn bg-teal rounded-pill px-3">Booking</a>
+                            <?php endif; ?>
+                            <?php if (session('logged_in_user')): ?>
+                                <a href="/booking/date" class="btn bg-teal rounded-pill px-3">Booking</a>
+                            <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -153,19 +188,118 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
 
-    <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
     <!-- Bootstrap 4 -->
     <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="/assets/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/assets/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="/assets/plugins/moment/moment.min.js"></script>
+    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="/assets/dist/js/adminlte.min.js"></script>
+    <script src="/assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/assets/dist/js/demo.js"></script>
-
+    <!-- <script src="/assets/dist/js/demo.js"></script> -->
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <!-- <script src="/assets/dist/js/pages/dashboard.js"></script> -->
+    <!-- DataTables  & Plugins -->
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jszip/jszip.min.js"></script>
+    <script src="/assets/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Select2 -->
+    <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- InputMask -->
+    <script src="/assets/plugins/moment/moment.min.js"></script>
+    <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Script -->
     <script>
+        // DataTable
+        $("#table-button").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": [{
+                extend: 'pdf',
+                footer: true
+            }, {
+                extend: 'excel',
+                footer: true
+            }],
+            "paging": false
+        }).buttons().container().appendTo('#tabel-pembelian_wrapper .col-md-6:eq(0)');
+        // Tabel non cetak
+        $('#table-global').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": false,
+        });
+        // Select2
+        // With Clear
+        $('.select2bs4-clear').select2({
+            theme: 'bootstrap4',
+            placeholder: 'Pilih opsi',
+            allowClear: true,
+            // containerCssClass: 'rounded-0',
+            // selectionCssClass: 'rounded-0'
+        });
+        $('.select2bs4-clear').one('select2:open', function(e) {
+            $('input.select2-search__field').prop('placeholder', 'Cari...');
+        });
+        // No Clear
+        $('.select2bs4').select2({
+            theme: 'bootstrap4',
+            placeholder: 'Pilih opsi',
+            allowClear: false,
+            // containerCssClass: 'rounded-0',
+            // selectionCssClass: 'rounded-0'
+        });
+        $('.select2bs4').one('select2:open', function(e) {
+            $('input.select2-search__field').prop('placeholder', 'Cari...');
+        });
+        // Tooltip
+        $('#tooltip_username_user').tooltip({
+            boundary: 'window'
+        })
+        $('#tooltip_password_user').tooltip({
+            boundary: 'window'
+        })
         // Toast Success
         window.onload = function() {
             let FLASHDATA_SUCCESS = "<?= session()->getFlashdata('success') ?>"
