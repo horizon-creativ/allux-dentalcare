@@ -27,6 +27,29 @@ class Booking extends BaseController
         $this->bookingModel = new BookingModel();
     }
 
+    public function detail($id_booking)
+    {
+        if (!session('logged_in_user')) {
+            return redirect()->to('/');
+        }
+
+        $booking = $this->bookingModel->where('id_booking', $id_booking)->first();
+        $layanan = $this->layananModel->where('id_layanan', $booking['id_layanan'])->first();
+        $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
+        $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
+        $dokter = $this->userModel->where('id_user', $jadwal['id_user'])->first();
+
+        $data['title'] = $booking['code_booking'];
+
+        $data['booking'] = $booking;
+        $data['layanan'] = $layanan;
+        $data['slotJadawl'] = $slotJadwal;
+        $data['jadwal'] = $jadwal;
+        $data['dokter'] = $dokter;
+
+        return view('User/Booking/Detail', $data);
+    }
+
     public function date()
     {
         if (!session('logged_in_user')) {
@@ -35,9 +58,7 @@ class Booking extends BaseController
 
         $data['title'] = 'Booking';
 
-        // Ambil data user berdasarkan id yang ada di session
-
-        return view('User/Booking/Index', $data);
+        return view('User/Booking/Date', $data);
     }
 
     public function slot()

@@ -20,6 +20,7 @@ $routes->group('', function ($routes) {
     $routes->get('booking/slot', 'User\Booking::slot');
     $routes->get('booking/layanan', 'User\Booking::layanan');
     $routes->post('booking/save', 'User\Booking::save');
+    $routes->get('booking/(:num)', 'User\Booking::detail/$1');
 });
 
 $routes->group('backoffice', function ($routes) {

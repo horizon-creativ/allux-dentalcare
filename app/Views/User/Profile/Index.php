@@ -1,5 +1,25 @@
 <?= $this->extend('Layout/Template_User') ?>
 <?= $this->section('content') ?>
+
+<?php
+function statusColor($status)
+{
+    switch ($status) {
+        case 'Waiting':
+            return 'info';
+            break;
+        case 'Confirmed':
+            return 'olive';
+            break;
+        case 'Completed':
+            return 'teal';
+            break;
+        case 'Cancelled':
+            return 'danger';
+            break;
+    }
+}
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper bg-white">
     <div class="container">
@@ -99,109 +119,129 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills">
+                        <div class="card card-teal card-tabs">
+                            <div class="card-header p-0 pt-1">
+                                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link bg-teal" href="#activity" data-toggle="tab">Activity</a>
+                                        <a class="nav-link active" id="custom-tabs-one-booking-tab" data-toggle="pill" href="#custom-tabs-one-booking" role="tab" aria-controls="custom-tabs-one-booking" aria-selected="true">Booking Aktif</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
+                                        <a class="nav-link" id="custom-tabs-one-history-tab" data-toggle="pill" href="#custom-tabs-one-history" role="tab" aria-controls="custom-tabs-one-history" aria-selected="false">History Booking</a>
                                     </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Messages</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Settings</a>
+                                    </li> -->
                                 </ul>
-                            </div><!-- /.card-header -->
+                            </div>
                             <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="active tab-pane" id="activity">
-                                        <!-- Post -->
-                                        <div class="post">
-                                            <div class="user-block">
-                                                <img class="img-circle img-bordered-sm" src="/assets/dist/img/user1-128x128.jpg" alt="user image">
-                                                <span class="username">
-                                                    <a href="#">Jonathan Burke Jr.</a>
-                                                    <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                                </span>
-                                                <span class="description">Shared publicly - 7:30 PM today</span>
-                                            </div>
-                                            <!-- /.user-block -->
-                                            <p>
-                                                Lorem ipsum represents a long-held tradition for designers,
-                                                typographers and the like. Some people hate it and argue for
-                                                its demise, but others ignore the hate as they create awesome
-                                                tools to help create filler text for everyone from bacon lovers
-                                                to Charlie Sheen fans.
-                                            </p>
-
-                                            <p>
-                                                <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                                                <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                                                <span class="float-right">
-                                                    <a href="#" class="link-black text-sm">
-                                                        <i class="far fa-comments mr-1"></i> Comments (5)
-                                                    </a>
-                                                </span>
-                                            </p>
-
-                                            <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                                        </div>
-                                        <!-- /.post -->
-
-                                    </div>
-                                    <!-- /.tab-pane -->
-                                    <div class="tab-pane" id="settings">
-                                        <form class="form-horizontal">
-                                            <div class="form-group row">
-                                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                                <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                                <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="offset-sm-2 col-sm-10">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                                        </label>
+                                <div class="tab-content" id="custom-tabs-one-tabContent">
+                                    <div class="tab-pane fade show active" id="custom-tabs-one-booking" role="tabpanel" aria-labelledby="custom-tabs-one-booking-tab">
+                                        <?php foreach ($bookings as $booking): ?>
+                                            <!-- Hanya ambil booking aktiff saja -->
+                                            <?php if (array_search($booking['status_booking'], ['Completed', 'Cancelled']) == ''): ?>
+                                                <?php
+                                                // Ambil layanan
+                                                $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
+                                                // Ambil slot jadwal
+                                                $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
+                                                // Ambil jadwal
+                                                $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
+                                                // Ambil dokter
+                                                $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                                                ?>
+                                                <!-- Booking -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_user/<?= $dokter['img_user'] ?>" alt="user image">
+                                                        <span class="username">
+                                                            <a href="#" class="text-teal"><?= $dokter['name_user'] ?></a>
+                                                            <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
+                                                        </span>
+                                                        <span class="description"><?= date('l, d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></span>
                                                     </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        Layanan: <?= $layanan['name_layanan'] ?>
+                                                        <br>
+                                                        Keluhan: <?= $booking['keluhan_booking'] ?>
+                                                    </p>
+
+                                                    <p>
+                                                        <!-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
+                                                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a> -->
+                                                        <span class="float-right">
+                                                            <a href="/booking/<?= $booking['id_booking'] ?>" class="btn btn-success rounded-pill px-3">
+                                                                <i class="fas fa-qrcode mr-1"></i> Lihat Kode Booking
+                                                            </a>
+                                                        </span>
+                                                    </p>
+
+                                                    <!-- <input class="form-control form-control-sm" type="text" placeholder="Type a comment"> -->
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="offset-sm-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                                <!-- /.post -->
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane fade" id="custom-tabs-one-history" role="tabpanel" aria-labelledby="custom-tabs-one-history-tab">
+                                        <?php foreach ($bookings as $booking): ?>
+                                            <!-- Hanya ambil booking aktiff saja -->
+                                            <?php if (array_search($booking['status_booking'], ['Completed', 'Cancelled']) != ''): ?>
+                                                <?php
+                                                // Ambil layanan
+                                                $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
+                                                // Ambil slot jadwal
+                                                $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
+                                                // Ambil jadwal
+                                                $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
+                                                // Ambil dokter
+                                                $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                                                ?>
+                                                <!-- Booking -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_user/<?= $dokter['img_user'] ?>" alt="user image">
+                                                        <span class="username">
+                                                            <a href="#" class="text-teal"><?= $dokter['name_user'] ?></a>
+                                                            <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
+                                                        </span>
+                                                        <span class="description"><?= date('l, d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        Layanan: <?= $layanan['name_layanan'] ?>
+                                                        <br>
+                                                        Keluhan: <?= $booking['keluhan_booking'] ?>
+                                                    </p>
+
+                                                    <p>
+                                                        <!-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
+                                                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a> -->
+                                                        <!-- <span class="float-right">
+                                                            <a href="#" class="btn btn-success rounded-pill px-3">
+                                                                <i class="fas fa-qrcode mr-1"></i> Lihat Kode Booking
+                                                            </a>
+                                                        </span> -->
+                                                    </p>
+
+                                                    <!-- <input class="form-control form-control-sm" type="text" placeholder="Type a comment"> -->
+                                                </div>
+                                                <!-- /.post -->
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <!-- <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                                        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                                    </div> -->
                                 </div>
-                                <!-- /.tab-content -->
-                            </div><!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
                     <!-- /.col -->
                 </div>
