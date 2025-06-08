@@ -44,7 +44,7 @@ class Profile extends BaseController
         // Ambil data user berdasarkan id yang ada di session
         $data['user'] = $this->userModel->where('id_user', session('id_user'))->first();
         // Ambil data booking untuk history
-        $data['bookings'] = $this->bookingModel->where('id_user', session('id_user'))->findAll();
+        $data['bookings'] = $this->bookingModel->where('id_user', session('id_user'))->orderBy('date_booking', 'DESC')->findAll();
 
         return view('User/Profile/Index', $data);
     }

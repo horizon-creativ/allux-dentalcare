@@ -53,4 +53,5 @@ $routes->group('backoffice', function ($routes) {
 $routes->group('bo-auth', function ($routes) {
     $routes->get('login', 'Backoffice\Auth::login');
     $routes->post('login/validate', 'Backoffice\Auth::loginValidate');
+    $routes->get('logout', 'Backoffice\Auth::logout');
 });

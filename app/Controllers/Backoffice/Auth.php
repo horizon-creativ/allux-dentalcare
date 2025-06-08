@@ -75,4 +75,17 @@ class Auth extends BaseController
             }
         }
     }
+
+    public function logout()
+    {
+        session()->remove('logged_in_bo');
+        session()->remove('id_user');
+        session()->remove('name_user');
+        session()->remove('email_user');
+        session()->remove('phone_user');
+        session()->remove('level_user');
+
+        session()->setFlashdata('success', 'Anda telah logout');
+        return redirect()->to('/backoffice');
+    }
 }
