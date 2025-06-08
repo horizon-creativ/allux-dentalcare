@@ -312,20 +312,32 @@
                             <ul class="nav nav-treeview">
                                 <?php if (session('level_user') == 'Kasir'): ?>
                                     <li class="nav-item">
-                                        <a href="/backoffice/booking-masuk" class="nav-link <?= $menu == 'BookingMasuk' ? 'active bg-teal' : '' ?>">
+                                        <a href="/backoffice/booking-masuk" class="nav-link <?= $menu == 'Booking Masuk' ? 'active bg-teal' : '' ?>">
                                             <i class="fas fa-calendar nav-icon"></i>
                                             <p>Booking Masuk</p>
                                         </a>
                                     </li>
                                 <?php endif; ?>
-                                <li class="nav-item">
-                                    <a href="/backoffice/pasien" class="nav-link <?= $menu == 'Pasien' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-user-alt nav-icon"></i>
-                                        <p>Pasien</p>
-                                    </a>
-                                </li>
+                                <?php if (session('level_user') == 'Dokter'): ?>
+                                    <li class="nav-item">
+                                        <a href="/backoffice/booking-pasien" class="nav-link <?= $menu == 'Booking Pasien' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-user-alt nav-icon"></i>
+                                            <p>Pasien</p>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         </li>
+                        <?php if (session('level_user') == 'Kasir'): ?>
+                            <li class="nav-item">
+                                <a href="/backoffice/kasir" class="nav-link <?= $menu == 'Dashboard' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-cash-register"></i>
+                                    <p>
+                                        Kasir
+                                    </p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

@@ -138,12 +138,14 @@ class Booking extends BaseController
             return redirect()->to('/booking/layanan?date_booking=' . $vars['date_booking'] . '&slt=' . $vars['id_slot_jadwal'])->withInput();
         }
 
+        $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $vars['id_slot_jadwal'])->first();
+
         $bookingData = [
             'id_user' => session('id_user'),
             'id_slot_jadwal' => $vars['id_slot_jadwal'],
             'id_layanan' => $vars['id_layanan'],
             'code_booking' => 'ALX-' . session('id_user') .  $vars['id_slot_jadwal'] . rand(100, 999),
-            'date_booking' => $vars['date_booking'],
+            'date_booking' => date("Y-m-d H:i:s", strtotime($vars['date_booking'] . " " . $slotJadwal['time_slot'])),
             'keluhan_booking' => $vars['keluhan_booking'],
             'status_booking' => 'Waiting',
         ];

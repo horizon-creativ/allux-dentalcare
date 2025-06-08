@@ -50,6 +50,9 @@ $routes->group('backoffice', function ($routes) {
     $routes->delete('jadwal', 'Backoffice\Jadwal::delete');
     // Pasien
     $routes->get('pasien', 'Backoffice\Pasien::index');
+    // Booking Masuk
+    $routes->get('booking-masuk', 'Backoffice\BookingMasuk::index');
+    $routes->patch('booking-masuk', 'Backoffice\BookingMasuk::confirm');
 });
 
 $routes->group('bo-auth', function ($routes) {
