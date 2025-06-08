@@ -244,36 +244,38 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item <?= $menuGroup == 'Master' ? 'menu-open' : '' ?>">
-                            <a href="#" class="nav-link <?= $menuGroup == 'Master' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-box"></i>
-                                <p>
-                                    Master
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!-- <span class="badge badge-info right">6</span> -->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/backoffice/user" class="nav-link <?= $menu == 'User' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-user nav-icon"></i>
-                                        <p>User</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/backoffice/layanan" class="nav-link <?= $menu == 'Layanan' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-user-md nav-icon"></i>
-                                        <p>Layanan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/backoffice/obat" class="nav-link <?= $menu == 'Obat' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-pills nav-icon"></i>
-                                        <p>Obat</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php if (session('level_user') == 'Superadmin'): ?>
+                            <li class="nav-item <?= $menuGroup == 'Master' ? 'menu-open' : '' ?>">
+                                <a href="#" class="nav-link <?= $menuGroup == 'Master' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-box"></i>
+                                    <p>
+                                        Master
+                                        <i class="fas fa-angle-left right"></i>
+                                        <!-- <span class="badge badge-info right">6</span> -->
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/backoffice/user" class="nav-link <?= $menu == 'User' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-user nav-icon"></i>
+                                            <p>User</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/backoffice/layanan" class="nav-link <?= $menu == 'Layanan' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-user-md nav-icon"></i>
+                                            <p>Layanan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/backoffice/obat" class="nav-link <?= $menu == 'Obat' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-pills nav-icon"></i>
+                                            <p>Obat</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item <?= $menuGroup == 'Data' ? 'menu-open' : '' ?>">
                             <a href="#" class="nav-link <?= $menuGroup == 'Data' ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-table"></i>
@@ -298,14 +300,31 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                        <li class="nav-item <?= $menuGroup == 'Booking' ? 'menu-open' : '' ?>">
+                            <a href="#" class="nav-link <?= $menuGroup == 'Booking' ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    Widgets
-                                    <span class="right badge badge-danger">New</span>
+                                    Booking
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!-- <span class="badge badge-info right">6</span> -->
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <?php if (session('level_user') == 'Kasir'): ?>
+                                    <li class="nav-item">
+                                        <a href="/backoffice/booking-masuk" class="nav-link <?= $menu == 'BookingMasuk' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-calendar nav-icon"></i>
+                                            <p>Booking Masuk</p>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                                <li class="nav-item">
+                                    <a href="/backoffice/pasien" class="nav-link <?= $menu == 'Pasien' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-user-alt nav-icon"></i>
+                                        <p>Pasien</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>

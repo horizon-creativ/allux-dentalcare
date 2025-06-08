@@ -48,6 +48,8 @@ $routes->group('backoffice', function ($routes) {
     $routes->post('jadwal', 'Backoffice\Jadwal::create');
     $routes->patch('jadwal', 'Backoffice\Jadwal::update');
     $routes->delete('jadwal', 'Backoffice\Jadwal::delete');
+    // Pasien
+    $routes->get('pasien', 'Backoffice\Pasien::index');
 });
 
 $routes->group('bo-auth', function ($routes) {
