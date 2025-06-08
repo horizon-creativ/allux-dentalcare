@@ -55,19 +55,19 @@ function statusColor($status)
     <div class="container">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <!-- <div class="container-fluid">
+            <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Booking</h1>
+                        <!-- <h1>Booking</h1> -->
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Booking</li>
+                            <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+                            <li class="breadcrumb-item active">Booking Detail</li>
                         </ol>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </section>
 
         <!-- Main content -->
@@ -103,11 +103,17 @@ function statusColor($status)
                                     <li class="list-group-item">
                                         <b>Status</b>
                                         <div class="float-right"><span class="badge bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></div>
+                                        <?php if ($booking['status_booking'] == 'Confirmed'): ?>
+                                            <p class="text-center font-italic">Booking anda telah dikonfirmasi, harap datang setidaknya 15 menit sebelum jadwal.</p>
+                                            <p class="text-center font-italic text-danger">Apabila lebih dari 15 menit dari jadwal tidak hadir, maka booking dianggap cancel.</p>
+                                        <?php endif; ?>
                                     </li>
                                 </ul>
                                 <br>
                                 <div class="row">
-                                    <a href="/booking/cancel/<?= $booking['id_booking'] ?>" class="btn btn-outline-danger rounded-pill px-3 mx-auto">Batalkan Booking</a>
+                                    <?php if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress']) == ''): ?>
+                                        <a href="/booking/cancel/<?= $booking['id_booking'] ?>" class="btn btn-outline-danger rounded-pill px-3 mx-auto">Batalkan Booking</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

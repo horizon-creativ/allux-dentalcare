@@ -158,4 +158,22 @@ class Booking extends BaseController
             return redirect()->to('/profile');
         }
     }
+
+    public function cancel($id_booking)
+    {
+        // Siapkan data untuk diupdate statusnya
+        $bookingData = [
+            'id_booking' => $id_booking,
+            'status_booking' => 'Cancelled',
+        ];
+
+        $save = $this->bookingModel->save($bookingData);
+
+        if (!$save) {
+            return redirect()->to('/booking/detail/' . $id_booking);
+        } else {
+            session()->setFlashdata('success', 'Berhasil membatalkan booking');
+            return redirect()->to('/profile');
+        }
+    }
 }

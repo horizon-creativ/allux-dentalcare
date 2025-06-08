@@ -21,6 +21,7 @@ $routes->group('', function ($routes) {
     $routes->get('booking/layanan', 'User\Booking::layanan');
     $routes->post('booking/save', 'User\Booking::save');
     $routes->get('booking/(:num)', 'User\Booking::detail/$1');
+    $routes->get('booking/cancel/(:num)', 'User\Booking::cancel/$1');
 });
 
 $routes->group('backoffice', function ($routes) {
