@@ -44,7 +44,7 @@ function statusColor($status)
         case 'Cancelled':
             return 'danger';
             break;
-        case 'On Progress':
+        case 'Dalam Perawatan':
             return 'navy';
             break;
     }

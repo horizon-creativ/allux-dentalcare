@@ -17,6 +17,9 @@ function statusColor($status)
         case 'Cancelled':
             return 'danger';
             break;
+        case 'Dalam Perawatan':
+            return 'navy';
+            break;
     }
 }
 ?>

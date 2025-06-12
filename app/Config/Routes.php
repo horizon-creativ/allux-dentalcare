@@ -53,6 +53,18 @@ $routes->group('backoffice', function ($routes) {
     // Booking Masuk
     $routes->get('booking-masuk', 'Backoffice\BookingMasuk::index');
     $routes->patch('booking-masuk', 'Backoffice\BookingMasuk::confirm');
+    // Booking Pasien
+    $routes->get('booking-pasien', 'Backoffice\BookingPasien::index');
+    $routes->post('booking-pasien', 'Backoffice\BookingPasien::perawatan');
+    $routes->get('booking-pasien/(:num)', 'Backoffice\BookingPasien::detail/$1');
+    // Tambah layanan dan obat
+    $routes->post('booking-pasien/layanan', 'Backoffice\BookingPasien::addLayanan');
+    $routes->post('booking-pasien/obat', 'Backoffice\BookingPasien::addObat');
+    // Edit dan Delete item
+    $routes->patch('booking-pasien/item', 'Backoffice\BookingPasien::updateItem');
+    $routes->delete('booking-pasien/item', 'Backoffice\BookingPasien::deleteItem');
+    // Finish perawatan
+    $routes->post('booking-pasien/finish', 'Backoffice\BookingPasien::finish');
 });
 
 $routes->group('bo-auth', function ($routes) {
