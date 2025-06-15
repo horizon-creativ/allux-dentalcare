@@ -141,7 +141,7 @@ class Kasir extends BaseController
 
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
-            'format' => [58, 297], // 58mm x 100mm (bisa disesuaikan)
+            'format' => [72, 297], // 58mm x 100mm (bisa disesuaikan)
             'margin_left' => 2,
             'margin_right' => 2,
             'margin_top' => 2,
