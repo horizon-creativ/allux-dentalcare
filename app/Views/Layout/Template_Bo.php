@@ -338,6 +338,36 @@
                                 </a>
                             </li>
                         <?php endif; ?>
+                        <li class="nav-item <?= $menuGroup == 'Riwayat' ? 'menu-open' : '' ?>">
+                            <a href="#" class="nav-link <?= $menuGroup == 'Riwayat' ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Riwayat
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!-- <span class="badge badge-info right">6</span> -->
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/backoffice/riwayat/booking" class="nav-link <?= $menu == 'Riwayat Booking' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-calendar nav-icon"></i>
+                                        <p>Booking</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/backoffice/riwayat/pasien" class="nav-link <?= $menu == 'Riwayat Pasien' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-user-alt nav-icon"></i>
+                                        <p>Pasien</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/backoffice/riwayat/pembayaran" class="nav-link <?= $menu == 'Riwayat Pembayaran' ? 'active bg-teal' : '' ?>">
+                                        <i class="fas fa-money-bill-alt nav-icon"></i>
+                                        <p>Pembayaran</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
