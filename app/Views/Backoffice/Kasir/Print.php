@@ -123,8 +123,9 @@ function penyebut($nilai)
         }
 
         .logo {
-            filter: saturate(150) grayscale(1) contrast(10);
-            mix-blend-mode: multiply;
+            -webkit-filter: grayscale(100%);
+            /* Safari 6.0 - 9.0 */
+            filter: grayscale(100%);
         }
     </style>
     <!-- ORIGINAL -->
