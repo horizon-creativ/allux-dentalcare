@@ -330,7 +330,7 @@
                         </li>
                         <?php if (session('level_user') == 'Kasir'): ?>
                             <li class="nav-item">
-                                <a href="/backoffice/kasir" class="nav-link <?= $menu == 'Dashboard' ? 'active' : '' ?>">
+                                <a href="/backoffice/kasir" class="nav-link <?= $menu == 'Kasir' ? 'active' : '' ?>">
                                     <i class="nav-icon fas fa-cash-register"></i>
                                     <p>
                                         Kasir

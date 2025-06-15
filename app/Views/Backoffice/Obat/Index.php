@@ -57,10 +57,8 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <?php if ($obat['id_obat'] != session('id_obat')): ?>
-                                                        <a href="#" data-toggle="modal" data-target="#edit-modal<?= $obat['id_obat'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" data-toggle="modal" data-target="#delete-modal<?= $obat['id_obat'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
-                                                    <?php endif; ?>
+                                                    <a href="#" data-toggle="modal" data-target="#edit-modal<?= $obat['id_obat'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
+                                                    <a href="#" data-toggle="modal" data-target="#delete-modal<?= $obat['id_obat'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <!-- Modal Delete -->

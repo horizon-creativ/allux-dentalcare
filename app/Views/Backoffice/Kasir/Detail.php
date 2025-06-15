@@ -73,12 +73,6 @@ function statusColor($status)
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <?php
-            $totalInvoice = 0;
-            foreach ($invoiceItems as $invoiceItemTotal) {
-                $totalInvoice += $invoiceItemTotal['total_item'];
-            }
-            ?>
             <!-- Main row -->
             <div class="row">
                 <div class="col-12">
@@ -90,15 +84,15 @@ function statusColor($status)
                                         <tr>
                                             <td>Dokter</td>
                                             <td>:</td>
-                                            <th><?= $dokter['name_user'] ?></th>
+                                            <th><?= $invoice['name_dokter'] ?></th>
                                         </tr>
                                         <tr>
                                             <td>Pasien</td>
                                             <td>:</td>
-                                            <th><?= $pasien['name_user'] ?></th>
+                                            <th><?= $invoice['name_pasien'] ?></th>
                                         </tr>
                                         <tr>
-                                            <td>Tanggal</td>
+                                            <td>Tgl. Perawatan</td>
                                             <td>:</td>
                                             <th><?= date("d F Y - H:i", strtotime($booking['date_booking'])) ?></th>
                                         </tr>
@@ -107,46 +101,19 @@ function statusColor($status)
                                 <div class="col-3">
                                     <table>
                                         <tr>
-                                            <th>Keluhan</th>
+                                            <td>No. Trans</td>
                                             <td>:</td>
-                                            <td><?= $booking['keluhan_booking'] ?></td>
+                                            <th><?= $invoice['no_invoice'] ?></th>
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-3">
-                                    <table>
-                                        <tr>
-                                            <th>Total</th>
-                                            <td>:</td>
-                                            <td>Rp. <?= number_format($totalInvoice, 0, ',', '.') ?></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-3">
-                                    <a href="#" class="btn bg-teal float-right" data-toggle="modal" data-target="#finish-modal">Selesai</a>
-                                    <div class="modal fade" id="finish-modal" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
-                                        <div class="modal-dialog modal modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle text-teal"></i></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apakah anda yakin proses perawatan sudah selesai?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                    <form action="/backoffice/booking-pasien/finish" method="post" class="d-inline">
-                                                        <?= csrf_field() ?>
-                                                        <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
-                                                        <input type="hidden" name="id_invoice" value="<?= $invoice['id_invoice'] ?>">
-                                                        <input type="hidden" name="total_invoice" value="<?= $totalInvoice ?>">
-                                                        <button type="submit" class="btn bg-teal">Ya, Selesai</button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                <div class="col-6 bg-secondary rounded px-3 pt-2">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="text-left">
+                                            <h1>Rp</h1>
+                                        </div>
+                                        <div class="text-right">
+                                            <h1><?= number_format($invoice['total_invoice'], 0, ',', '.') ?></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -160,8 +127,7 @@ function statusColor($status)
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn bg-primary float-right ml-3" data-toggle="modal" data-target="#add-obat-modal" title="Tambah Data"><i class="fas fa-pills"></i>&nbsp; <b>Tambah Obat</b></a>
-                            <a href="#" class="btn bg-teal float-right" data-toggle="modal" data-target="#add-layanan-modal" title="Tambah Data"><i class="fas fa-user-md"></i>&nbsp; <b>Tambah Layanan</b></a>
+                            <a href="#" class="btn bg-purple float-right" data-toggle="modal" data-target="#pay-modal" title="Bayar"><i class="fas fa-money-bill-alt"></i>&nbsp; <b>Bayar</b></a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -175,7 +141,7 @@ function statusColor($status)
                                             <th>Harga</th>
                                             <th>Qty</th>
                                             <th>Total</th>
-                                            <th>Aksi</th>
+                                            <!-- <th>Aksi</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -200,10 +166,10 @@ function statusColor($status)
                                                         <div class="text-right"><?= number_format($invoiceItem['total_item'], 0, ',', '.') ?></div>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     <a href="#" data-toggle="modal" data-target="#edit-modal<?= $invoiceItem['id_invoice_item'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
                                                     <a href="#" data-toggle="modal" data-target="#delete-modal<?= $invoiceItem['id_invoice_item'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             <!-- Modal Delete -->
                                             <div class="modal fade" id="delete-modal<?= $invoiceItem['id_invoice_item'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
@@ -296,19 +262,21 @@ function statusColor($status)
     <!-- /.content -->
 </div>
 
+
 <!-- Add Modal -->
-<div class="modal fade" id="add-layanan-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="pay-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pembayaran <?= $title ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/backoffice/booking-pasien/layanan" method="post">
+            <form action="/backoffice/kasir/pay" method="post">
                 <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
                 <input type="hidden" name="id_invoice" value="<?= $invoice['id_invoice'] ?>">
+                <input type="hidden" name="total_invoice" id="total_invoice" value="<?= $invoice['total_invoice'] ?>">
                 <div class="modal-body">
                     <?php if (session()->getFlashdata('failed')) : ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -321,23 +289,42 @@ function statusColor($status)
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="id_layanan" class="col-form-label">Layanan</label>
-                                <select name="id_layanan" id="" class="form-control select2bs4" <?= (validation_show_error('id_layanan')) ? 'is-invalid' : '' ?>>
-                                    <?php foreach ($layanans as $layanan): ?>
-                                        <option value="<?= $layanan['id_layanan'] ?>"><?= $layanan['name_layanan'] . ' - ' . number_format($layanan['price_layanan'], 0, ',', '.') ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <!-- Validation Error Msg -->
-                                <div id="id_layanan_error" class="invalid-feedback">
-                                    <?= validation_show_error('id_layanan') ?>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="text-left">
+                                                <h1>Rp</h1>
+                                            </div>
+                                            <div class="text-right">
+                                                <h1><?= number_format($invoice['total_invoice'], 0, ',', '.') ?></h1>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="qty_layanan" class="col-form-label">Jumlah</label>
-                                <input type="number" name="qty_layanan" id="qty_layanan" class="form-control <?= (validation_show_error('qty_layanan')) ? 'is-invalid' : '' ?>" value="<?= 1 ?>">
-                                <!-- Validation Error Msg -->
-                                <div id="qty_layanan_error" class="invalid-feedback">
-                                    <?= validation_show_error('qty_layanan') ?>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-4 col-form-label text-right">Metode Pembayaran</label>
+                                <div class="col-sm-8">
+                                    <select name="type_payment" id="" class="form-control select2bs4">
+                                        <option value="TUNAI">TUNAI</option>
+                                        <option value="QRIS">QRIS</option>
+                                        <option value="DEBIT">DEBIT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-4 col-form-label text-right">Jumlah Pembayaran</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="amount_payment" id="amount_payment" class="form-control <?= (validation_show_error('amount_payment')) ? 'is-invalid' : '' ?>" value="<?= old('amount_payment') ?>">
+                                    <div id="amount_payment_error" class="invalid-feedback">
+                                        <?= validation_show_error('amount_payment') ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-4 col-form-label text-right">Kembalian</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="change_payment" id="change_payment" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -351,67 +338,19 @@ function statusColor($status)
     </div>
 </div>
 
-<!-- Add Modal -->
-<div class="modal fade" id="add-obat-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title ?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="/backoffice/booking-pasien/obat" method="post">
-                <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
-                <input type="hidden" name="id_invoice" value="<?= $invoice['id_invoice'] ?>">
-                <div class="modal-body">
-                    <?php if (session()->getFlashdata('failed')) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong><i class="fas fa-exclamation-triangle"></i></strong> &nbsp; <?= session()->getFlashdata('failed') ?>
-                            <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> -->
-                        </div>
-                    <?php endif; ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="id_obat" class="col-form-label">Obat</label>
-                                <select name="id_obat" id="" class="form-control select2bs4" <?= (validation_show_error('id_obat')) ? 'is-invalid' : '' ?>>
-                                    <?php foreach ($obats as $obat): ?>
-                                        <option value="<?= $obat['id_obat'] ?>"><?= $obat['name_obat'] . ' - ' . number_format($obat['price_obat'], 0, ',', '.') ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <!-- Validation Error Msg -->
-                                <div id="id_obat_error" class="invalid-feedback">
-                                    <?= validation_show_error('id_obat') ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="qty_obat" class="col-form-label">Jumlah</label>
-                                <input type="number" name="qty_obat" id="qty_obat" class="form-control <?= (validation_show_error('qty_obat')) ? 'is-invalid' : '' ?>" value="<?= 1 ?>">
-                                <!-- Validation Error Msg -->
-                                <div id="qty_obat_error" class="invalid-feedback">
-                                    <?= validation_show_error('qty_obat') ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="desc_obat" class="col-form-label">Instruksi Pemakaian Obat</label>
-                                <textarea name="desc_obat" id="" cols="30" rows="3" class="form-control <?= (validation_show_error('desc_obat')) ? 'is-invalid' : '' ?>"></textarea>
-                                <!-- Validation Error Msg -->
-                                <div id="desc_obat_error" class="invalid-feedback">
-                                    <?= validation_show_error('desc_obat') ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn bg-teal">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<script>
+    // Hitung Kembalian
+    document.getElementById("amount_payment").addEventListener("input", function() {
+        // Ambil nilai dari input
+        let jumlah = parseFloat(this.value) || 0; // Jumlah pembayaran, default 0 jika kosong
+        let total = parseFloat(document.getElementById("total_invoice").value) || 0; // Total pembayaran
+
+        // Hitung kembalian
+        let kembali = jumlah - total;
+
+        // Tampilkan hasil ke input 'kembali'
+        document.getElementById("change_payment").value = kembali > 0 ? kembali.toFixed(0) : 0;
+    });
+</script>
 
 <?= $this->endSection() ?>

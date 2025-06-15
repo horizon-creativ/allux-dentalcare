@@ -65,6 +65,11 @@ $routes->group('backoffice', function ($routes) {
     $routes->delete('booking-pasien/item', 'Backoffice\BookingPasien::deleteItem');
     // Finish perawatan
     $routes->post('booking-pasien/finish', 'Backoffice\BookingPasien::finish');
+    // Kasir
+    $routes->get('kasir', 'Backoffice\Kasir::index');
+    $routes->get('kasir/(:num)', 'Backoffice\Kasir::detail/$1');
+    $routes->post('kasir/pay', 'Backoffice\Kasir::pay');
+    $routes->get('kasir/print/(:num)', 'Backoffice\Kasir::print/$1');
 });
 
 $routes->group('bo-auth', function ($routes) {

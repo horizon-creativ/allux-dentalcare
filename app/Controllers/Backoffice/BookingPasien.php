@@ -249,6 +249,7 @@ class BookingPasien extends BaseController
 
         $id_booking = $vars['id_booking'];
         $id_invoice = $vars['id_invoice'];
+        $total_invoice = $vars['total_invoice'];
 
         $bookingData = [
             'id_booking' => $id_booking,
@@ -263,6 +264,7 @@ class BookingPasien extends BaseController
         } else {
             $invoiceData = [
                 'id_invoice' => $id_invoice,
+                'total_invoice' => $total_invoice,
                 'status_invoice' => 'Waiting Payment',
             ];
 
