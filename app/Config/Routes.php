@@ -70,6 +70,10 @@ $routes->group('backoffice', function ($routes) {
     $routes->get('kasir/(:num)', 'Backoffice\Kasir::detail/$1');
     $routes->post('kasir/pay', 'Backoffice\Kasir::pay');
     $routes->get('kasir/print/(:num)', 'Backoffice\Kasir::print/$1');
+    // Riwayat Booking
+    $routes->get('riwayat/booking', 'Backoffice\RiwayatBooking::index');
+    // Riwayat Pembayaran
+    $routes->get('riwayat/pembayaran', 'Backoffice\RiwayatPembayaran::index');
 });
 
 $routes->group('bo-auth', function ($routes) {

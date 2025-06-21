@@ -40,6 +40,9 @@
     <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- daterange picker -->
     <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- <link rel="stylesheet" href="/assets/css/styles.css"> -->
     <!-- jQuery -->
     <!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 </head>
@@ -355,12 +358,6 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/backoffice/riwayat/pasien" class="nav-link <?= $menu == 'Riwayat Pasien' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-user-alt nav-icon"></i>
-                                        <p>Pasien</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="/backoffice/riwayat/pembayaran" class="nav-link <?= $menu == 'Riwayat Pembayaran' ? 'active bg-teal' : '' ?>">
                                         <i class="fas fa-money-bill-alt nav-icon"></i>
                                         <p>Pembayaran</p>
@@ -426,10 +423,6 @@
     <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/dist/js/adminlte.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="/assets/dist/js/demo.js"></script> -->
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <!-- <script src="/assets/dist/js/pages/dashboard.js"></script> -->
     <!-- DataTables  & Plugins -->
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -452,9 +445,13 @@
     <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- date-range-picker -->
     <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
-
+    <!-- date-range-picker -->
+    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Custom Script -->
     <script>
+        // Daterange
+        //Date range picker
+        $('.daterange').daterangepicker()
         // Input Mask
         //time dd/mm/yyyy
         // $('#datetime').inputmask('HH:MM', {
@@ -463,6 +460,10 @@
         $('[data-mask]').inputmask()
         // DataTable
         $("#table-button").DataTable({
+            "lengthMenu": [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
@@ -473,8 +474,9 @@
                 extend: 'excel',
                 footer: true
             }],
-            "paging": false
-        }).buttons().container().appendTo('#tabel-pembelian_wrapper .col-md-6:eq(0)');
+            "paging": true,
+            "searching": true,
+        }).buttons().container().appendTo('#tabel-button_wrapper .col-md-6:eq(0)');
         // Tabel non cetak
         $('#table-global').DataTable({
             "paging": true,
@@ -485,6 +487,19 @@
             "autoWidth": false,
             "responsive": false,
         });
+        // Tabel print new
+        $("#table-print").DataTable({
+            "lengthMenu": [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
+            "paging": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            'footer': true,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#table-print_wrapper .col-md-6:eq(0)');
         // Select2
         // With Clear
         $('.select2bs4-clear').select2({
