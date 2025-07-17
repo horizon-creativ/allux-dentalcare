@@ -111,7 +111,7 @@ function statusColor($status)
                                 </ul>
                                 <br>
                                 <div class="row">
-                                    <?php if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress']) == ''): ?>
+                                    <?php if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress', 'Confirmed']) == ''): ?>
                                         <a href="/booking/cancel/<?= $booking['id_booking'] ?>" class="btn btn-outline-danger rounded-pill px-3 mx-auto">Batalkan Booking</a>
                                     <?php endif; ?>
                                 </div>

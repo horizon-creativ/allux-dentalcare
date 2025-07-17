@@ -64,14 +64,33 @@ function convertDay($dayNumber)
                                     <?php foreach ($slots as $slot): ?>
                                         <?php
                                         // Cek booking pada tanggal dan slot, apabila sudah ada maka tombol akan disable
-                                        $booking = $bookingModel->where('id_slot_jadwal', $slot['id_slot_jadwal'])->where('date_booking', $date_booking)->where('status_booking !=', 'Cancelled')->first();
+                                        $booking = $bookingModel->where('id_slot_jadwal', $slot['id_slot_jadwal'])->where('DATE(date_booking) =', $date_booking)->where('status_booking !=', 'Cancelled')->first();
+
+                                        $btnStatus = '';
+                                        if ($date_booking == date("Y-m-d")) {
+                                            if (date("H:i", strtotime($slot['time_slot'])) < date('H:i')) {
+                                                $btnStatus = 'disabled';
+                                            } else {
+                                                if ($booking) {
+                                                    $btnStatus = 'disabled';
+                                                } else {
+                                                    $btnStatus = '';
+                                                }
+                                            }
+                                        } else {
+                                            if ($booking) {
+                                                $btnStatus = 'disabled';
+                                            } else {
+                                                $btnStatus = '';
+                                            }
+                                        }
                                         ?>
                                         <div class="col-4 mx-auto">
                                             <form action="/booking/layanan" method="get">
                                                 <input type="hidden" name="date_booking" value="<?= $date_booking ?>">
                                                 <input type="hidden" name="slt" value="<?= $slot['id_slot_jadwal'] ?>">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn bg-teal btn-block rounded-pill" <?= $booking ? 'disabled' : '' ?>><?= date("H:i", strtotime($slot['time_slot'])) ?></button>
+                                                    <button type="submit" class="btn bg-teal btn-block rounded-pill" <?= $btnStatus ?>><?= date("H:i", strtotime($slot['time_slot'])) ?></button>
                                                 </div>
                                             </form>
                                         </div>
