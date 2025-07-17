@@ -39,7 +39,7 @@ class BookingMasuk extends BaseController
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
         // Ambil data booking list
-        $data['bookings'] = $this->bookingModel->where('DATE(date_booking) =', date("Y-m-d"))->orderBy('date_booking', 'ASC')->findAll();
+        $data['bookings'] = $this->bookingModel->where('DATE(date_booking) >=', date("Y-m-d"))->orderBy('date_booking', 'ASC')->findAll();
 
         return view('Backoffice/BookingMasuk/Index', $data);
     }
@@ -50,7 +50,7 @@ class BookingMasuk extends BaseController
 
         $bookingData = [
             'id_booking' => $vars['id_booking'],
-            'status_booking' => 'Confirmed',
+            'status_booking' => $vars['status_booking'],
         ];
 
         $save = $this->bookingModel->save($bookingData);
@@ -60,7 +60,7 @@ class BookingMasuk extends BaseController
             session()->setFlashdata('failed', 'Gagal, harap coba lagi');
             return redirect()->to('/backoffice/booking-masuk')->withInput();
         } else {
-            session()->setFlashdata('success', 'Berhasil mengkonfirmasi booking');
+            session()->setFlashdata('success', 'Booking ' . $vars['status_booking']);
             return redirect()->to('/backoffice/booking-masuk')->withInput();
         }
     }

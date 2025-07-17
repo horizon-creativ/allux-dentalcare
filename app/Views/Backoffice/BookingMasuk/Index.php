@@ -198,10 +198,24 @@ function statusColor($status)
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
+                                                            <?php
+
+                                                            $btnStatus = '';
+                                                            if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress', 'Confirmed']) != '') {
+                                                                $btnStatus = 'disabled';
+                                                            }
+                                                            ?>
                                                             <form action="/backoffice/booking-masuk" method="post">
                                                                 <input type="hidden" name="_method" value="PATCH">
                                                                 <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
-                                                                <button type="submit" class="btn bg-teal" <?= $booking['status_booking'] == 'Confirmed' ? 'disabled' : '' ?>>Konfirmasi Booking</button>
+                                                                <input type="hidden" name="status_booking" value="Cancelled">
+                                                                <button type="submit" class="btn bg-danger" <?= $btnStatus ?>>Tolak Booking</button>
+                                                            </form>
+                                                            <form action="/backoffice/booking-masuk" method="post">
+                                                                <input type="hidden" name="_method" value="PATCH">
+                                                                <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
+                                                                <input type="hidden" name="status_booking" value="Confirmed">
+                                                                <button type="submit" class="btn bg-teal" <?= $btnStatus ?>>Konfirmasi Booking</button>
                                                             </form>
                                                         </div>
                                                     </div>
