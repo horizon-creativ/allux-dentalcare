@@ -303,34 +303,36 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item <?= $menuGroup == 'Booking' ? 'menu-open' : '' ?>">
-                            <a href="#" class="nav-link <?= $menuGroup == 'Booking' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-list"></i>
-                                <p>
-                                    Booking
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!-- <span class="badge badge-info right">6</span> -->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <?php if (session('level_user') == 'Kasir'): ?>
-                                    <li class="nav-item">
-                                        <a href="/backoffice/booking-masuk" class="nav-link <?= $menu == 'Booking Masuk' ? 'active bg-teal' : '' ?>">
-                                            <i class="fas fa-calendar nav-icon"></i>
-                                            <p>Booking Masuk</p>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if (session('level_user') == 'Dokter'): ?>
-                                    <li class="nav-item">
-                                        <a href="/backoffice/booking-pasien" class="nav-link <?= $menu == 'Booking Pasien' ? 'active bg-teal' : '' ?>">
-                                            <i class="fas fa-user-alt nav-icon"></i>
-                                            <p>Pasien</p>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
+                        <?php if (session('level_user') != 'Superadmin'): ?>
+                            <li class="nav-item <?= $menuGroup == 'Booking' ? 'menu-open' : '' ?>">
+                                <a href="#" class="nav-link <?= $menuGroup == 'Booking' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>
+                                        Booking
+                                        <i class="fas fa-angle-left right"></i>
+                                        <!-- <span class="badge badge-info right">6</span> -->
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <?php if (session('level_user') == 'Kasir'): ?>
+                                        <li class="nav-item">
+                                            <a href="/backoffice/booking-masuk" class="nav-link <?= $menu == 'Booking Masuk' ? 'active bg-teal' : '' ?>">
+                                                <i class="fas fa-calendar nav-icon"></i>
+                                                <p>Booking Masuk</p>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if (session('level_user') == 'Dokter'): ?>
+                                        <li class="nav-item">
+                                            <a href="/backoffice/booking-pasien" class="nav-link <?= $menu == 'Booking Pasien' ? 'active bg-teal' : '' ?>">
+                                                <i class="fas fa-user-alt nav-icon"></i>
+                                                <p>Pasien</p>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
                         <?php if (session('level_user') == 'Kasir'): ?>
                             <li class="nav-item">
                                 <a href="/backoffice/kasir" class="nav-link <?= $menu == 'Kasir' ? 'active' : '' ?>">
