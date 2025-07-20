@@ -200,22 +200,27 @@ function statusColor($status)
                                                         <div class="modal-footer">
                                                             <?php
 
-                                                            $btnStatus = '';
+                                                            $btnConfirmStatus = '';
+                                                            $btnCancelStatus = '';
                                                             if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress', 'Confirmed']) != '') {
-                                                                $btnStatus = 'disabled';
+                                                                $btnConfirmStatus = 'disabled';
+                                                            }
+
+                                                            if (array_search($booking['status_booking'], ['Completed', 'Cancelled', 'On Progress']) != '') {
+                                                                $btnCancelStatus = 'disabled';
                                                             }
                                                             ?>
                                                             <form action="/backoffice/booking-masuk" method="post">
                                                                 <input type="hidden" name="_method" value="PATCH">
                                                                 <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
                                                                 <input type="hidden" name="status_booking" value="Cancelled">
-                                                                <button type="submit" class="btn bg-danger" <?= $btnStatus ?>>Tolak Booking</button>
+                                                                <button type="submit" class="btn bg-danger" <?= $btnCancelStatus ?>>Tolak Booking</button>
                                                             </form>
                                                             <form action="/backoffice/booking-masuk" method="post">
                                                                 <input type="hidden" name="_method" value="PATCH">
                                                                 <input type="hidden" name="id_booking" value="<?= $booking['id_booking'] ?>">
                                                                 <input type="hidden" name="status_booking" value="Confirmed">
-                                                                <button type="submit" class="btn bg-teal" <?= $btnStatus ?>>Konfirmasi Booking</button>
+                                                                <button type="submit" class="btn bg-teal" <?= $btnConfirmStatus ?>>Konfirmasi Booking</button>
                                                             </form>
                                                         </div>
                                                     </div>

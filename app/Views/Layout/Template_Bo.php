@@ -359,12 +359,14 @@
                                         <p>Booking</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="/backoffice/riwayat/pembayaran" class="nav-link <?= $menu == 'Riwayat Pembayaran' ? 'active bg-teal' : '' ?>">
-                                        <i class="fas fa-money-bill-alt nav-icon"></i>
-                                        <p>Pembayaran</p>
-                                    </a>
-                                </li>
+                                <?php if (session('level_user') == 'Superadmin' || session('level_user') == 'Admin' || session('level_user') == 'Kasir'): ?>
+                                    <li class="nav-item">
+                                        <a href="/backoffice/riwayat/pembayaran" class="nav-link <?= $menu == 'Riwayat Pembayaran' ? 'active bg-teal' : '' ?>">
+                                            <i class="fas fa-money-bill-alt nav-icon"></i>
+                                            <p>Pembayaran</p>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                     </ul>

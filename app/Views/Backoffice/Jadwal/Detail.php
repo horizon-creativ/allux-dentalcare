@@ -57,7 +57,9 @@ function convertDay($dayNumber)
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn bg-teal float-right" data-toggle="modal" data-target="#add-modal" title="Tambah Data"><i class="fas fa-plus"></i>&nbsp; <b>Tambah Data</b></a>
+                            <?php if (session('level_user') == 'Superadmin' || session('level_user') == 'Admin'): ?>
+                                <a href="#" class="btn bg-teal float-right" data-toggle="modal" data-target="#add-modal" title="Tambah Data"><i class="fas fa-plus"></i>&nbsp; <b>Tambah Data</b></a>
+                            <?php endif; ?>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -68,7 +70,9 @@ function convertDay($dayNumber)
                                             <th>Hari</th>
                                             <th>Jam Mulai</th>
                                             <th>Jam Selesai</th>
-                                            <th>Aksi</th>
+                                            <?php if (session('level_user') == 'Superadmin' || session('level_user') == 'Admin'): ?>
+                                                <th>Aksi</th>
+                                            <?php endif; ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,12 +84,12 @@ function convertDay($dayNumber)
                                                 <td><?= convertDay($jadwal['day_jadwal']) ?></td>
                                                 <td><?= $jadwal['start_jadwal'] ?></td>
                                                 <td><?= $jadwal['end_jadwal'] ?></td>
-                                                <td>
-                                                    <?php if ($jadwal['id_jadwal'] != session('id_jadwal')): ?>
+                                                <?php if (session('level_user') == 'Superadmin' || session('level_user') == 'Admin'): ?>
+                                                    <td>
                                                         <a href="#" data-toggle="modal" data-target="#edit-modal<?= $jadwal['id_jadwal'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
                                                         <a href="#" data-toggle="modal" data-target="#delete-modal<?= $jadwal['id_jadwal'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
-                                                    <?php endif; ?>
-                                                </td>
+                                                    </td>
+                                                <?php endif; ?>
                                             </tr>
                                             <!-- Modal Delete -->
                                             <div class="modal fade" id="delete-modal<?= $jadwal['id_jadwal'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">

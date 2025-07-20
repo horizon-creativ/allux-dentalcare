@@ -112,6 +112,7 @@ function statusColor($status)
                                             <th>Jam</th>
                                             <th>Pasien</th>
                                             <th>Dokter</th>
+                                            <th>Layanan</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -133,6 +134,7 @@ function statusColor($status)
                                                 <td><?= date('H:i', strtotime($booking['date_booking'])) ?></td>
                                                 <td><?= $pasien['name_user'] ?></td>
                                                 <td><?= $dokter['name_user'] ?></td>
+                                                <td><?= $layanan['name_layanan'] ?></td>
                                                 <td><span class="badge bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></td>
                                             </tr>
                                         <?php endforeach; ?>

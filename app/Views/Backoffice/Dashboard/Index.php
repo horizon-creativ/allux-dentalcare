@@ -53,7 +53,7 @@
                             <div class="icon">
                                 <i class="fas fa-user-md"></i>
                             </div>
-                            <a href="/backoffice/dokter" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/backoffice/jadwal" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -113,7 +113,7 @@
                             <div class="icon">
                                 <i class="fas fa-money-bill"></i>
                             </div>
-                            <a href="/backoffice/pembayaran" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/backoffice/riwayat/pembayaran" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -164,7 +164,7 @@
                             <div class="icon">
                                 <i class="fas fa-money-bill"></i>
                             </div>
-                            <a href="/backoffice/pembayaran" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/backoffice/riwayat/pembayaran" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->

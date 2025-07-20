@@ -39,7 +39,7 @@ class Dashboard extends BaseController
         $data['jmlObat'] = $this->obatModel->countAllResults();
         $data['jmlPenghasilan'] = $this->paymentModel->select('SUM(amount_payment - change_payment) AS total_payment')->first();
         $data['jmlPasienPerDokter'] = $this->bookingModel->getPasienPerDokter(session('id_user'));
-        $data['jmlPenanganan'] = $this->bookingModel->getBookingPerDokter(session('id_User'));
+        $data['jmlPenanganan'] = $this->bookingModel->getBookingPerDokter(session('id_user'));
 
         return view('Backoffice/Dashboard/Index', $data);
     }
