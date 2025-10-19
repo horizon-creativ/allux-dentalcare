@@ -86,7 +86,7 @@ function convertDay($dayNumber)
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <label for="keluhan_booking" class="col-form-label">Keluhan</label>
+                                                    <label for="keluhan_booking" class="col-form-label">Deskripsi</label>
                                                     <textarea name="keluhan_booking" id="" cols="30" rows="5" class="form-control <?= (validation_show_error('keluhan_booking')) ? 'is-invalid' : '' ?>"><?= old('keluhan_booking') ?></textarea>
                                                     <!-- Validation Error Msg -->
                                                     <div id="keluhan_error" class="invalid-feedback">

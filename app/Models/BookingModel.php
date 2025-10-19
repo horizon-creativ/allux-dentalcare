@@ -15,24 +15,24 @@ class BookingModel extends Model
 
     protected $useTimestamps = true;
 
-    public function getPasienPerDokter($id_user)
+    public function getPasienPerDokter($id_dokter)
     {
         $this->join('tb_slot_jadwal', 'tb_slot_jadwal.id_slot_jadwal = tb_booking.id_slot_jadwal');
         $this->join('tb_jadwal', 'tb_jadwal.id_jadwal = tb_slot_jadwal.id_jadwal');
-        $this->join('tb_user', 'tb_user.id_user = tb_jadwal.id_user');
-        $this->where('tb_jadwal.id_user', $id_user);
+        $this->join('tb_dokter', 'tb_dokter.id_dokter = tb_jadwal.id_dokter');
+        $this->where('tb_jadwal.id_dokter', $id_dokter);
         $this->groupBy('tb_booking.id_user');
 
         return $this->findAll();
     }
 
-    public function getBookingPerDokter($id_user)
+    public function getBookingPerDokter($id_dokter)
     {
         $this->join('tb_slot_jadwal', 'tb_slot_jadwal.id_slot_jadwal = tb_booking.id_slot_jadwal');
         $this->join('tb_jadwal', 'tb_jadwal.id_jadwal = tb_slot_jadwal.id_jadwal');
-        $this->join('tb_user', 'tb_user.id_user = tb_jadwal.id_user');
-        $this->where('tb_jadwal.id_user', $id_user);
-        $this->where('tb_booking.status_booking !=', 'Cancelled');
+        $this->join('tb_dokter', 'tb_dokter.id_dokter = tb_jadwal.id_dokter');
+        $this->where('tb_jadwal.id_dokter', $id_dokter);
+        $this->where('tb_booking.status_booking', 'Completed');
 
         return $this->findAll();
     }

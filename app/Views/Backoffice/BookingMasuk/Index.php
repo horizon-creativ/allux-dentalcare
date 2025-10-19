@@ -103,7 +103,7 @@ function statusColor($status)
                                             $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
                                             $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                                             $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-                                            $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                                            $dokter = $userModel->where('id_dokter', $jadwal['id_dokter'])->first();
                                             ?>
                                             <tr>
                                                 <td class="text-center"><?= $no++ ?></td>
@@ -179,7 +179,7 @@ function statusColor($status)
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Tanggal</b>
-                                                                            <div class="float-right"><?= date('d F Y', strtotime($booking['date_booking'])) ?></div>
+                                                                            <div class="float-right"><?= date('d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></div>
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Layanan</b>

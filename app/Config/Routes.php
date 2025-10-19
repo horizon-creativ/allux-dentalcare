@@ -32,6 +32,11 @@ $routes->group('backoffice', function ($routes) {
     $routes->post('user', 'Backoffice\User::create');
     $routes->patch('user', 'Backoffice\User::update');
     $routes->delete('user', 'Backoffice\User::delete');
+    // Dokter
+    $routes->get('dokter', 'Backoffice\Dokter::index');
+    $routes->post('dokter', 'Backoffice\Dokter::create');
+    $routes->patch('dokter', 'Backoffice\Dokter::update');
+    $routes->delete('dokter', 'Backoffice\Dokter::delete');
     // Layanan
     $routes->get('layanan', 'Backoffice\Layanan::index');
     $routes->post('layanan', 'Backoffice\Layanan::create');

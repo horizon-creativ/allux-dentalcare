@@ -46,22 +46,22 @@
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        foreach ($users as $user): ?>
+                                        foreach ($dokters as $dokter): ?>
                                             <tr>
                                                 <td class="text-center"><?= $no++ ?></td>
-                                                <td><?= $user['name_user'] ?></td>
-                                                <td><?= $user['email_user'] ?></td>
-                                                <td><?= $user['phone_user'] ?></td>
-                                                <td><?= $user['level_user'] ?></td>
+                                                <td><?= $dokter['name_dokter'] ?></td>
+                                                <td><?= $dokter['email_dokter'] ?></td>
+                                                <td><?= $dokter['phone_dokter'] ?></td>
+                                                <td><?= $dokter['level_dokter'] ?></td>
                                                 <td>
-                                                    <?php if ($user['id_user'] != session('id_user')): ?>
-                                                        <a href="#" data-toggle="modal" data-target="#edit-modal<?= $user['id_user'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" data-toggle="modal" data-target="#delete-modal<?= $user['id_user'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
+                                                    <?php if ($dokter['id_dokter'] != session('id_dokter')): ?>
+                                                        <a href="#" data-toggle="modal" data-target="#edit-modal<?= $dokter['id_dokter'] ?>" class="btn bg-teal" title="Edit"><i class="fas fa-edit"></i></a>
+                                                        <a href="#" data-toggle="modal" data-target="#delete-modal<?= $dokter['id_dokter'] ?>" class="btn bg-danger" title="Hapus"><i class="fas fa-trash"></i></a>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
                                             <!-- Modal Delete -->
-                                            <div class="modal fade" id="delete-modal<?= $user['id_user'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+                                            <div class="modal fade" id="delete-modal<?= $dokter['id_dokter'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -74,9 +74,9 @@
                                                             <p>Apakah anda yakin akan menghapus data <?= $title ?>?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="/backoffice/user" method="post" class="d-inline">
+                                                            <form action="/backoffice/dokter" method="post" class="d-inline">
                                                                 <?= csrf_field() ?>
-                                                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                                                <input type="hidden" name="id_dokter" value="<?= $dokter['id_dokter'] ?>">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <button type="submit" class="btn bg-danger">Ya, Hapus</button>
                                                             </form>
@@ -87,7 +87,7 @@
                                                 </div>
                                             </div>
                                             <!-- Modal Edit -->
-                                            <div class="modal fade" id="edit-modal<?= $user['id_user'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="edit-modal<?= $dokter['id_dokter'] ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -96,9 +96,9 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="/backoffice/user" method="post">
+                                                        <form action="/backoffice/dokter" method="post">
                                                             <!-- Hidden Form untuk merubah method menjadi PATCH -->
-                                                            <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                                            <input type="hidden" name="id_dokter" value="<?= $dokter['id_dokter'] ?>">
                                                             <input type="hidden" name="_method" value="PATCH">
                                                             <?= csrf_field() ?>
                                                             <div class="modal-body">
@@ -110,40 +110,39 @@
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label for="name_user" class="col-form-label">Nama</label>
-                                                                            <input type="text" name="name_user" id="name_user" class="form-control <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= $user['name_user'] ?>">
+                                                                            <label for="name_dokter" class="col-form-label">Nama</label>
+                                                                            <input type="text" name="name_dokter" id="name_dokter" class="form-control <?= (validation_show_error('name_dokter')) ? 'is-invalid' : '' ?>" value="<?= $dokter['name_dokter'] ?>">
                                                                             <!-- Validation Error Msg -->
-                                                                            <div id="name_user_error" class="invalid-feedback">
-                                                                                <?= validation_show_error('name_user') ?>
+                                                                            <div id="name_dokter_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('name_dokter') ?>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="email_user" class="col-form-label">Email</label>
-                                                                            <input type="text" name="email_user" id="email_user" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" value="<?= $user['email_user'] ?>">
+                                                                            <label for="email_dokter" class="col-form-label">Email</label>
+                                                                            <input type="text" name="email_dokter" id="email_dokter" class="form-control <?= (validation_show_error('email_dokter')) ? 'is-invalid' : '' ?>" value="<?= $dokter['email_dokter'] ?>">
                                                                             <!-- Validation Error Msg -->
-                                                                            <div id="email_user_error" class="invalid-feedback">
-                                                                                <?= validation_show_error('email_user') ?>
+                                                                            <div id="email_dokter_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('email_dokter') ?>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="phone_user" class="col-form-label">No. Telp</label>
-                                                                            <input type="text" name="phone_user" id="phone_user" class="form-control <?= (validation_show_error('phone_user')) ? 'is-invalid' : '' ?>" value="<?= $user['phone_user'] ?>">
+                                                                            <label for="phone_dokter" class="col-form-label">No. Telp</label>
+                                                                            <input type="text" name="phone_dokter" id="phone_dokter" class="form-control <?= (validation_show_error('phone_dokter')) ? 'is-invalid' : '' ?>" value="<?= $dokter['phone_dokter'] ?>">
                                                                             <!-- Validation Error Msg -->
-                                                                            <div id="phone_user_error" class="invalid-feedback">
-                                                                                <?= validation_show_error('phone_user') ?>
+                                                                            <div id="phone_dokter_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('phone_dokter') ?>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="level_user" class="col-form-label">Level</label>
-                                                                            <select name="level_user" id="" class="form-control select2bs4 <?= (validation_show_error('level_user')) ? 'is-invalid' : '' ?>">
+                                                                            <label for="level_dokter" class="col-form-label">Level</label>
+                                                                            <select name="level_dokter" id="" class="form-control select2bs4 <?= (validation_show_error('level_dokter')) ? 'is-invalid' : '' ?>">
                                                                                 <option></option>
-                                                                                <option value="Kasir" <?= $user['level_user'] == 'Kasir' ? 'selected' : '' ?>>Kasir</option>
-                                                                                <!-- <option value="Dokter" <?= $user['level_user'] == 'Dokter' ? 'selected' : '' ?>>Dokter</option> -->
-                                                                                <option value="Superadmin" <?= $user['level_user'] == 'Superadmin' ? 'selected' : '' ?>>Superadmin</option>
+                                                                                <option value="Dokter" <?= $dokter['level_dokter'] == 'Dokter' ? 'selected' : '' ?>>Dokter</option>
+
                                                                             </select>
                                                                             <!-- Validation Error Msg -->
-                                                                            <div id="level_user_error" class="invalid-feedback">
-                                                                                <?= validation_show_error('level_user') ?>
+                                                                            <div id="level_dokter_error" class="invalid-feedback">
+                                                                                <?= validation_show_error('level_dokter') ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -180,7 +179,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/backoffice/user" method="post">
+            <form action="/backoffice/dokter" method="post">
                 <div class="modal-body">
                     <?php if (session()->getFlashdata('failed')) : ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -193,48 +192,46 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="name_user" class="col-form-label">Nama</label>
-                                <input type="text" name="name_user" id="name_user" class="form-control <?= (validation_show_error('name_user')) ? 'is-invalid' : '' ?>" value="<?= old('name_user') ?>">
+                                <label for="name_dokter" class="col-form-label">Nama</label>
+                                <input type="text" name="name_dokter" id="name_dokter" class="form-control <?= (validation_show_error('name_dokter')) ? 'is-invalid' : '' ?>" value="<?= old('name_dokter') ?>">
                                 <!-- Validation Error Msg -->
-                                <div id="name_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('name_user') ?>
+                                <div id="name_dokter_error" class="invalid-feedback">
+                                    <?= validation_show_error('name_dokter') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email_user" class="col-form-label">Email</label>
-                                <input type="text" name="email_user" id="email_user" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" value="<?= old('email_user') ?>">
+                                <label for="email_dokter" class="col-form-label">Email</label>
+                                <input type="text" name="email_dokter" id="email_dokter" class="form-control <?= (validation_show_error('email_dokter')) ? 'is-invalid' : '' ?>" value="<?= old('email_dokter') ?>">
                                 <!-- Validation Error Msg -->
-                                <div id="email_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('email_user') ?>
+                                <div id="email_dokter_error" class="invalid-feedback">
+                                    <?= validation_show_error('email_dokter') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="password_user" class="col-form-label">Password</label>
-                                <input type="password" name="password_user" id="password_user" class="form-control <?= (validation_show_error('password_user')) ? 'is-invalid' : '' ?>" value="<?= old('password_user') ?>">
+                                <label for="password_dokter" class="col-form-label">Password</label>
+                                <input type="password" name="password_dokter" id="password_dokter" class="form-control <?= (validation_show_error('password_dokter')) ? 'is-invalid' : '' ?>" value="<?= old('password_dokter') ?>">
                                 <!-- Validation Error Msg -->
-                                <div id="password_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('password_user') ?>
+                                <div id="password_dokter_error" class="invalid-feedback">
+                                    <?= validation_show_error('password_dokter') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="phone_user" class="col-form-label">No. Telp</label>
-                                <input type="text" name="phone_user" id="phone_user" class="form-control <?= (validation_show_error('phone_user')) ? 'is-invalid' : '' ?>" value="<?= old('phone_user') ?>">
+                                <label for="phone_dokter" class="col-form-label">No. Telp</label>
+                                <input type="text" name="phone_dokter" id="phone_dokter" class="form-control <?= (validation_show_error('phone_dokter')) ? 'is-invalid' : '' ?>" value="<?= old('phone_dokter') ?>">
                                 <!-- Validation Error Msg -->
-                                <div id="phone_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('phone_user') ?>
+                                <div id="phone_dokter_error" class="invalid-feedback">
+                                    <?= validation_show_error('phone_dokter') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="level_user" class="col-form-label">Level</label>
-                                <select name="level_user" id="" class="form-control select2bs4 <?= (validation_show_error('level_user')) ? 'is-invalid' : '' ?>">
+                                <label for="level_dokter" class="col-form-label">Level</label>
+                                <select name="level_dokter" id="" class="form-control select2bs4 <?= (validation_show_error('level_dokter')) ? 'is-invalid' : '' ?>">
                                     <option></option>
-                                    <option value="Kasir" <?= old('level_user') == 'Kasir' ? 'selected' : '' ?>>Kasir</option>
-                                    <!-- <option value="Dokter" <?= old('level_user') == 'Dokter' ? 'selected' : '' ?>>Dokter</option> -->
-                                    <option value="Superadmin" <?= old('level_user') == 'Superadmin' ? 'selected' : '' ?>>Superadmin</option>
+                                    <option value="Dokter" <?= old('level_dokter') == 'Dokter' ? 'selected' : '' ?>>Dokter</option>
                                 </select>
                                 <!-- Validation Error Msg -->
-                                <div id="level_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('level_user') ?>
+                                <div id="level_dokter_error" class="invalid-feedback">
+                                    <?= validation_show_error('level_dokter') ?>
                                 </div>
                             </div>
                         </div>

@@ -53,71 +53,20 @@ function statusColor($status)
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="/uploads/img_user/<?= $user['img_user'] ?>"
+                                        src="/uploads/img_user/<?= $pasien['img_pasien'] ?>"
                                         alt="User profile picture">
                                 </div>
 
-                                <h3 class="profile-username text-center"><?= $user['name_user'] ?></h3>
+                                <h3 class="profile-username text-center"><?= $pasien['name_pasien'] ?></h3>
 
-                                <p class="text-muted text-center"><?= $user['level_user'] ?></p>
+                                <p class="text-muted text-center"><?= $pasien['level_pasien'] ?></p>
 
-                                <ul class="list-group list-group-unbordered mb-3">
-                                    <li class="list-group-item">
-                                        <b>Followers</b> <a class="float-right">1,322</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Following</b> <a class="float-right">543</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Friends</b> <a class="float-right">13,287</a>
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="btn bg-teal btn-block rounded-pill"><b>Follow</b></a>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
 
                         <!-- About Me Box -->
-                        <div class="card card-teal">
-                            <div class="card-header">
-                                <h3 class="card-title">About Me</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                                <p class="text-muted">
-                                    B.S. in Computer Science from the University of Tennessee at Knoxville
-                                </p>
-
-                                <hr>
-
-                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                                <p class="text-muted">Malibu, California</p>
-
-                                <hr>
-
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                                <p class="text-muted">
-                                    <span class="tag tag-danger">UI Design</span>
-                                    <span class="tag tag-success">Coding</span>
-                                    <span class="tag tag-info">Javascript</span>
-                                    <span class="tag tag-warning">PHP</span>
-                                    <span class="tag tag-primary">Node.js</span>
-                                </p>
-
-                                <hr>
-
-                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
                         <!-- /.card -->
                     </div>
                     <!-- /.col -->
@@ -153,12 +102,12 @@ function statusColor($status)
                                                 // Ambil jadwal
                                                 $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
                                                 // Ambil dokter
-                                                $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                                                $dokter = $dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
                                                 ?>
                                                 <!-- Booking -->
                                                 <div class="post">
                                                     <div class="user-block">
-                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_user/<?= $dokter['img_user'] ?>" alt="user image">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="user image">
                                                         <span class="username">
                                                             <a href="#" class="text-teal"><?= $dokter['name_user'] ?></a>
                                                             <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
@@ -200,14 +149,14 @@ function statusColor($status)
                                                 // Ambil jadwal
                                                 $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
                                                 // Ambil dokter
-                                                $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                                                $dokter = $dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
                                                 ?>
                                                 <!-- Booking -->
                                                 <div class="post">
                                                     <div class="user-block">
-                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_user/<?= $dokter['img_user'] ?>" alt="user image">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="user image">
                                                         <span class="username">
-                                                            <a href="#" class="text-teal"><?= $dokter['name_user'] ?></a>
+                                                            <a href="#" class="text-teal"><?= $dokter['name_dokter'] ?></a>
                                                             <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
                                                         </span>
                                                         <span class="description"><?= date('l, d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></span>

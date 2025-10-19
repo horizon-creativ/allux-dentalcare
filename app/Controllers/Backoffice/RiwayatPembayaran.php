@@ -59,7 +59,7 @@ class RiwayatPembayaran extends BaseController
         $data['jadwalModel'] = $this->jadwalModel;
         $data['paymentModel'] = $this->paymentModel;
 
-        $data['invoices'] = $this->invoiceModel->where('DATE(updated_at) >=', $dateFrom)->where('DATE(updated_at) <=', $dateTo)->orderBy('updated_at', 'DESC')->findAll();
+        $data['invoices'] = $this->invoiceModel->where('DATE(updated_at) >=', $dateFrom)->where('DATE(updated_at) <=', $dateTo)->where('status_invoice !=', 'Pending')->orderBy('updated_at', 'DESC')->findAll();
 
         return view('Backoffice/RiwayatPembayaran/Index', $data);
     }

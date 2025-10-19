@@ -41,7 +41,7 @@ function convertDay($dayNumber)
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#"><?= $menuGroup ?></a></li>
                         <li class="breadcrumb-item"><a href="/backoffice/jadwal"><?= $menu ?></a></li>
-                        <li class="breadcrumb-item active"><?= $user['name_user'] ?></li>
+                        <li class="breadcrumb-item active"><?= $dokter['name_dokter'] ?></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -107,7 +107,7 @@ function convertDay($dayNumber)
                                                         <div class="modal-footer">
                                                             <form action="/backoffice/jadwal" method="post" class="d-inline">
                                                                 <?= csrf_field() ?>
-                                                                <input type="hidden" name="id_user" value="<?= $jadwal['id_user'] ?>">
+                                                                <input type="hidden" name="id_dokter" value="<?= $jadwal['id_dokter'] ?>">
                                                                 <input type="hidden" name="id_jadwal" value="<?= $jadwal['id_jadwal'] ?>">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <button type="submit" class="btn bg-danger">Ya, Hapus</button>
@@ -131,7 +131,7 @@ function convertDay($dayNumber)
                                                         <form action="/backoffice/jadwal" method="post">
                                                             <!-- Hidden Form untuk merubah method menjadi PATCH -->
                                                             <input type="hidden" name="id_jadwal" value="<?= $jadwal['id_jadwal'] ?>">
-                                                            <input type="hidden" name="id_user" value="<?= $jadwal['id_user'] ?>">
+                                                            <input type="hidden" name="id_dokter" value="<?= $jadwal['id_dokter'] ?>">
                                                             <input type="hidden" name="_method" value="PATCH">
                                                             <?= csrf_field() ?>
                                                             <div class="modal-body">
@@ -210,7 +210,7 @@ function convertDay($dayNumber)
                 </button>
             </div>
             <form action="/backoffice/jadwal" method="post">
-                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                <input type="hidden" name="id_dokter" value="<?= $dokter['id_dokter'] ?>">
                 <div class="modal-body">
                     <?php if (session()->getFlashdata('failed')) : ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">

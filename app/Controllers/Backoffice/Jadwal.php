@@ -4,7 +4,7 @@ namespace App\Controllers\Backoffice;
 
 use App\Controllers\BaseController;
 
-use App\Models\UserModel;
+use App\Models\DokterModel;
 use App\Models\JadwalModel;
 use App\Models\SlotJadwalModel;
 
@@ -14,13 +14,13 @@ use DateInterval;
 
 class Jadwal extends BaseController
 {
-    protected $userModel;
+    protected $dokterModel;
     protected $jadwalModel;
     protected $slotJadwalModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->dokterModel = new DokterModel();
         $this->jadwalModel = new JadwalModel();
         $this->slotJadwalModel = new SlotJadwalModel();
     }
@@ -33,23 +33,23 @@ class Jadwal extends BaseController
         $data['menuGroup'] = 'Data'; //Untuk handle sistem menu
         $data['menu'] = 'Jadwal'; //Untuk handle sistem sub menu
 
-        $data['users'] = $this->userModel->where('level_user', 'Dokter')->orderBy('name_user', 'ASC')->findAll();
+        $data['dokters'] = $this->dokterModel->where('level_dokter', 'Dokter')->orderBy('name_dokter', 'ASC')->findAll();
 
         return view('Backoffice/Jadwal/Index', $data);
     }
 
-    public function detail($id_user)
+    public function detail($id_dokter)
     {
         // ?? Menampilkan jadwal masing-masing dokter
 
-        $user = $this->userModel->where('id_user', $id_user)->first();
+        $dokter = $this->dokterModel->where('id_dokter', $id_dokter)->first();
         // Data yg akan dioper ke view
-        $data['title'] = 'Jadwal - ' . $user['name_user']; // Judul halaman
+        $data['title'] = 'Jadwal - ' . $dokter['name_dokter']; // Judul halaman
         $data['menuGroup'] = 'Data'; //Untuk handle sistem menu
         $data['menu'] = 'Jadwal'; //Untuk handle sistem sub menu
 
-        $data['user'] = $user;
-        $data['jadwals'] = $this->jadwalModel->where('id_user', $id_user)->findAll();
+        $data['dokter'] = $dokter;
+        $data['jadwals'] = $this->jadwalModel->where('id_dokter', $id_dokter)->findAll();
 
         return view('Backoffice/Jadwal/Detail', $data);
     }
@@ -79,12 +79,12 @@ class Jadwal extends BaseController
             ]
         ])) {
             session()->setFlashdata('modalOpen', 'add-modal');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user'])->withInput();
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter'])->withInput();
         }
 
         // Array data yang akan disimpan
         $jadwalData = [
-            'id_user' => $vars['id_user'],
+            'id_dokter' => $vars['id_dokter'],
             'day_jadwal' => $vars['day_jadwal'],
             'start_jadwal' => date("H:i", strtotime($vars['start_jadwal'])),
             'end_jadwal' => date("H:i", strtotime($vars['end_jadwal'])),
@@ -94,7 +94,7 @@ class Jadwal extends BaseController
 
         if (!$save) {
             session()->setFlashdata('failed', 'Gagal, harap coba lagi');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user'])->withInput();
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter'])->withInput();
         } else {
             $id_jadwal = $this->jadwalModel->getInsertID();
             // Kalkulasi Slot per 1 Jam dari Jadwal Dokter
@@ -120,7 +120,7 @@ class Jadwal extends BaseController
             }
 
             session()->setFlashdata('success', 'Berhasil meyimpan data');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user']);
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter']);
         }
     }
 
@@ -149,13 +149,13 @@ class Jadwal extends BaseController
             ]
         ])) {
             session()->setFlashdata('modalOpen', 'add-modal');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user'])->withInput();
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter'])->withInput();
         }
 
         // Array data yang akan disimpan
         $jadwalData = [
             'id_jadwal' => $vars['id_jadwal'],
-            'id_user' => $vars['id_user'],
+            'id_dokter' => $vars['id_dokter'],
             'day_jadwal' => $vars['day_jadwal'],
             'start_jadwal' => date("H:i", strtotime($vars['start_jadwal'])),
             'end_jadwal' => date("H:i", strtotime($vars['end_jadwal'])),
@@ -165,7 +165,7 @@ class Jadwal extends BaseController
 
         if (!$save) {
             session()->setFlashdata('failed', 'Gagal, harap coba lagi');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user'])->withInput();
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter'])->withInput();
         } else {
             // Delete slot lama terlebih daulu
             $this->slotJadwalModel->where('id_jadwal', $vars['id_jadwal'])->delete(null, true);
@@ -193,7 +193,7 @@ class Jadwal extends BaseController
             }
 
             session()->setFlashdata('success', 'Berhasil meyimpan data');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user']);
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter']);
         }
     }
 
@@ -205,12 +205,12 @@ class Jadwal extends BaseController
 
         if (!$delete) {
             session()->setFlashdata('failed', 'Gagal, harap coba lagi');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user'])->withInput();
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter'])->withInput();
         } else {
             $deleteSlot = $this->slotJadwalModel->where('id_jadwal', $vars['id_jadwal'])->delete(null, true);
 
             session()->setFlashdata('success', 'Berhasil meyimpan data');
-            return redirect()->to('/backoffice/jadwal/' . $vars['id_user']);
+            return redirect()->to('/backoffice/jadwal/' . $vars['id_dokter']);
         }
     }
 }

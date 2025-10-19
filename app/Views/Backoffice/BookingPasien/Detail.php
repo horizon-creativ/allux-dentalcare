@@ -301,7 +301,7 @@ function statusColor($status)
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Layanan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -332,14 +332,14 @@ function statusColor($status)
                                     <?= validation_show_error('id_layanan') ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="qty_layanan" class="col-form-label">Jumlah</label>
-                                <input type="number" name="qty_layanan" id="qty_layanan" class="form-control <?= (validation_show_error('qty_layanan')) ? 'is-invalid' : '' ?>" value="<?= 1 ?>">
-                                <!-- Validation Error Msg -->
-                                <div id="qty_layanan_error" class="invalid-feedback">
+                            <!-- <div class="form-group">
+                                <label for="qty_layanan" class="col-form-label">Jumlah</label> -->
+                            <input type="hidden" name="qty_layanan" id="qty_layanan" class="form-control <?= (validation_show_error('qty_layanan')) ? 'is-invalid' : '' ?>" value="<?= 1 ?>">
+                            <!-- Validation Error Msg -->
+                            <!-- <div id="qty_layanan_error" class="invalid-feedback">
                                     <?= validation_show_error('qty_layanan') ?>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

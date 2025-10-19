@@ -9,6 +9,8 @@ use App\Models\UserModel;
 use App\Models\LayananModel;
 use App\Models\SlotJadwalModel;
 use App\Models\BookingModel;
+use App\Models\DokterModel;
+use App\Models\PasienModel;
 
 class Booking extends BaseController
 {
@@ -17,6 +19,8 @@ class Booking extends BaseController
     protected $layananModel;
     protected $slotJadwalModel;
     protected $bookingModel;
+    protected $pasienModel;
+    protected $dokterModel;
 
     public function __construct()
     {
@@ -25,6 +29,8 @@ class Booking extends BaseController
         $this->layananModel = new LayananModel();
         $this->slotJadwalModel = new SlotJadwalModel();
         $this->bookingModel = new BookingModel();
+        $this->pasienModel = new PasienModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function detail($id_booking)
@@ -37,13 +43,13 @@ class Booking extends BaseController
         $layanan = $this->layananModel->where('id_layanan', $booking['id_layanan'])->first();
         $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
         $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-        $dokter = $this->userModel->where('id_user', $jadwal['id_user'])->first();
+        $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
 
         $data['title'] = $booking['code_booking'];
 
         $data['booking'] = $booking;
         $data['layanan'] = $layanan;
-        $data['slotJadawl'] = $slotJadwal;
+        $data['slotJadwal'] = $slotJadwal;
         $data['jadwal'] = $jadwal;
         $data['dokter'] = $dokter;
 

@@ -9,6 +9,8 @@ use App\Models\BookingModel;
 use App\Models\SlotJadwalModel;
 use App\Models\JadwalModel;
 use App\Models\LayananModel;
+use App\Models\PasienModel;
+use App\Models\DokterModel;
 
 class Profile extends BaseController
 {
@@ -17,6 +19,8 @@ class Profile extends BaseController
     protected $slotJadwalModel;
     protected $jadwalModel;
     protected $layananModel;
+    protected $pasienModel;
+    protected $dokterModel;
 
     public function __construct()
     {
@@ -25,6 +29,8 @@ class Profile extends BaseController
         $this->slotJadwalModel = new SlotJadwalModel();
         $this->jadwalModel = new JadwalModel();
         $this->layananModel = new LayananModel();
+        $this->pasienModel = new PasienModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function index()
@@ -39,10 +45,12 @@ class Profile extends BaseController
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
         $data['userModel'] = $this->userModel;
+        $data['pasienModel'] = $this->pasienModel;
+        $data['dokterModel'] = $this->dokterModel;
         $data['layananModel'] = $this->layananModel;
 
         // Ambil data user berdasarkan id yang ada di session
-        $data['user'] = $this->userModel->where('id_user', session('id_user'))->first();
+        $data['pasien'] = $this->pasienModel->where('id_pasien', session('id_user'))->first();
         // Ambil data booking untuk history
         $data['bookings'] = $this->bookingModel->where('id_user', session('id_user'))->orderBy('date_booking', 'DESC')->findAll();
 

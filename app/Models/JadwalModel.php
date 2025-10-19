@@ -11,7 +11,7 @@ class JadwalModel extends Model
 
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_user', 'day_jadwal', 'start_jadwal', 'end_jadwal'];
+    protected $allowedFields = ['id_dokter', 'day_jadwal', 'start_jadwal', 'end_jadwal'];
 
     protected $useTimestamps = true;
 }

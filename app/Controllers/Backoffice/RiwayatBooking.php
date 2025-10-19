@@ -10,6 +10,7 @@ use App\Models\SlotJadwalModel;
 use App\Models\JadwalModel;
 use App\Models\UserModel;
 use App\Models\LayananModel;
+use App\Models\DokterModel;
 
 class RiwayatBooking extends BaseController
 {
@@ -18,6 +19,7 @@ class RiwayatBooking extends BaseController
     protected $jadwalModel;
     protected $userModel;
     protected $layananModel;
+    protected $dokterModel;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class RiwayatBooking extends BaseController
         $this->jadwalModel = new JadwalModel();
         $this->userModel = new UserModel();
         $this->layananModel = new LayananModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function index()
@@ -50,6 +53,7 @@ class RiwayatBooking extends BaseController
         $data['layananModel'] = $this->layananModel;
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
+        $data['dokterModel'] = $this->dokterModel;
 
 
         $data['bookings'] = $this->bookingModel->where('DATE(date_booking) >=', $dateFrom)->where('DATE(date_booking) <=', $dateTo)->orderBy('date_booking', 'DESC')->findAll();

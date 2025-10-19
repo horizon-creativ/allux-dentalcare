@@ -13,27 +13,27 @@
                         <form action="/login/validate" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" name="email_user" placeholder="Email">
+                                <input type="text" class="form-control <?= (validation_show_error('email_pasien')) ? 'is-invalid' : '' ?>" name="email_pasien" placeholder="Email">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
                                 <!-- Validation Error Msg -->
-                                <div id="email_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('email_user') ?>
+                                <div id="email_pasien_error" class="invalid-feedback">
+                                    <?= validation_show_error('email_pasien') ?>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control <?= (validation_show_error('password_user')) ? 'is-invalid' : '' ?>" name="password_user" placeholder="Password">
+                                <input type="password" class="form-control <?= (validation_show_error('password_pasien')) ? 'is-invalid' : '' ?>" name="password_pasien" placeholder="Password">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
                                 <!-- Validation Error Msg -->
-                                <div id="password_user_error" class="invalid-feedback">
-                                    <?= validation_show_error('password_user') ?>
+                                <div id="password_pasien_error" class="invalid-feedback">
+                                    <?= validation_show_error('password_pasien') ?>
                                 </div>
                             </div>
                             <div class="col-12">

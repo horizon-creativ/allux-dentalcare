@@ -4,15 +4,15 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 
-use App\Models\UserModel;
+use App\Models\PasienModel;
 
 class Auth extends BaseController
 {
-    protected $userModel;
+    protected $pasienModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->pasienModel = new PasienModel();
     }
 
     public function login()
@@ -34,14 +34,14 @@ class Auth extends BaseController
         $vars = $this->request->getVar();
 
         if (!$this->validateData($vars, [
-            'name_user' => [
+            'name_pasien' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Nama lengkap wajib diisi.',
                 ]
             ],
-            'phone_user' => [
-                'rules' => 'trim|required|min_length[10]|max_length[15]|numeric|is_unique[tb_user.phone_user]',
+            'phone_pasien' => [
+                'rules' => 'trim|required|min_length[10]|max_length[15]|numeric|is_unique[tb_pasien.phone_pasien]',
                 'errors' => [
                     'required' => 'Nomor telepon wajib diisi.',
                     'min_length' => 'Nomor telepon minimal 10 karakter',
@@ -50,8 +50,8 @@ class Auth extends BaseController
                     'is_unique' => 'Nomor telepon sudah terdaftar',
                 ]
             ],
-            'email_user' => [
-                'rules' => 'trim|required|max_length[30]|valid_email|is_unique[tb_user.email_user]',
+            'email_pasien' => [
+                'rules' => 'trim|required|max_length[30]|valid_email|is_unique[tb_pasien.email_pasien]',
                 'errors' => [
                     'required' => 'Email wajib diisi',
                     'max_length' => 'Email maksimal 30 karakter',
@@ -59,7 +59,7 @@ class Auth extends BaseController
                     'is_unique' => 'Email sudah terdaftar',
                 ]
             ],
-            'password_user' => [
+            'password_pasien' => [
                 'rules' => 'trim|required|min_length[8]',
                 'errors' => [
                     'required' => 'Password wajib diisi',
@@ -71,17 +71,17 @@ class Auth extends BaseController
             return redirect()->to('/register')->withInput();
         }
 
-        // Array data user untuk disimpan ke tabel user
-        $userData = [
-            'email_user' => $vars['email_user'],
-            'password_user' => password_hash($vars['password_user'], PASSWORD_DEFAULT),
-            'name_user' => $vars['name_user'],
-            'phone_user' => $vars['phone_user'],
-            'level_user' => 'Pasien',
+        // Array data pasien untuk disimpan ke tabel pasien
+        $pasienData = [
+            'email_pasien' => $vars['email_pasien'],
+            'password_pasien' => password_hash($vars['password_pasien'], PASSWORD_DEFAULT),
+            'name_pasien' => $vars['name_pasien'],
+            'phone_pasien' => $vars['phone_pasien'],
+            'level_pasien' => 'Pasien',
         ];
 
-        // Proses simpan ke tabel user
-        $save = $this->userModel->save($userData);
+        // Proses simpan ke tabel pasien
+        $save = $this->pasienModel->save($pasienData);
 
         if (!$save) {
             session()->setFlashdata('failed', 'Gagal, harap coba lagi');
@@ -97,14 +97,14 @@ class Auth extends BaseController
         $vars = $this->request->getVar();
 
         if (!$this->validateData($vars, [
-            'email_user' => [
+            'email_pasien' => [
                 'rules' => 'trim|required|valid_email',
                 'errors' => [
                     'required' => 'Email wajib diisi',
                     'valid_email' => 'Harus berupa email yang valid',
                 ]
             ],
-            'password_user' => [
+            'password_pasien' => [
                 'rules' => 'trim|required',
                 'errors' => [
                     'required' => 'Password wajib diisi',
@@ -115,27 +115,27 @@ class Auth extends BaseController
             return redirect()->to('/login')->withInput();
         }
 
-        // Ambil data user berdasarkan email
-        $user = $this->userModel->where('email_user', $vars['email_user'])->first();
+        // Ambil data pasien berdasarkan email
+        $pasien = $this->pasienModel->where('email_pasien', $vars['email_pasien'])->first();
 
-        if (!$user) {
+        if (!$pasien) {
             // Kalau email tidak ada di database
             session()->setFlashdata('failed', 'Email belum terdaftar');
             return redirect()->to('/login')->withInput();
         } else {
-            if (!password_verify($vars['password_user'], $user['password_user'])) {
+            if (!password_verify($vars['password_pasien'], $pasien['password_pasien'])) {
                 // Apabila password salah
                 session()->setFlashdata('failed', 'Password salah, harap coba lagi');
                 return redirect()->to('/login')->withInput();
             } else {
                 session()->set('logged_in_user', true);
-                session()->set('id_user', $user['id_user']);
-                session()->set('email_user', $user['email_user']);
-                session()->set('phone_user', $user['phone_user']);
-                session()->set('name_user', $user['name_user']);
-                session()->set('level_user', $user['level_user']);
+                session()->set('id_user', $pasien['id_pasien']);
+                session()->set('email_user', $pasien['email_pasien']);
+                session()->set('phone_user', $pasien['phone_pasien']);
+                session()->set('name_user', $pasien['name_pasien']);
+                session()->set('level_user', $pasien['level_pasien']);
 
-                session()->setFlashdata('success', 'Selamat datang ' . $user['name_user']);
+                session()->setFlashdata('success', 'Selamat datang ' . $pasien['name_pasien']);
                 return redirect()->to('/');
             }
         }

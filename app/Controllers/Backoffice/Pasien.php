@@ -4,15 +4,15 @@ namespace App\Controllers\Backoffice;
 
 use App\Controllers\BaseController;
 
-use App\Models\UserModel;
+use App\Models\PasienModel;
 
 class Pasien extends BaseController
 {
-    protected $userModel;
+    protected $pasienModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->pasienModel = new PasienModel();
     }
 
     public function index()
@@ -21,8 +21,8 @@ class Pasien extends BaseController
         $data['menuGroup'] = 'Data';
         $data['menu'] = 'Pasien';
 
-        // Ambil data user yang levelnya pasien
-        $data['users'] = $this->userModel->where('level_user', 'Pasien')->findAll();
+        // Ambil data pasien yang levelnya pasien
+        $data['pasiens'] = $this->pasienModel->where('level_pasien', 'Pasien')->findAll();
 
         return view('Backoffice/Pasien/Index', $data);
     }

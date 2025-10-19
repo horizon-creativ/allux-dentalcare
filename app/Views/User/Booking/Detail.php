@@ -90,7 +90,7 @@ function statusColor($status)
                                     </li>
                                     <li class="list-group-item">
                                         <b>Tanggal</b>
-                                        <div class="float-right"><?= date('d F Y', strtotime($booking['date_booking'])) ?></div>
+                                        <div class="float-right"><?= date('d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></div>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Layanan</b>
