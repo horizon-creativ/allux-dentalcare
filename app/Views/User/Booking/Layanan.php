@@ -73,10 +73,10 @@ function convertDay($dayNumber)
                                             </div>
                                             <div class="form-group">
                                                 <label for="id_layanan" class="col-form-label">Layanan</label>
-                                                <select name="id_layanan" id="" class="form-control select2bs4 <?= (validation_show_error('id_layanan')) ? 'is-invalid' : '' ?>">
+                                                <select name="id_layanan" id="id_layanan" class="form-control select2bs4 <?= (validation_show_error('id_layanan')) ? 'is-invalid' : '' ?>">
                                                     <option></option>
                                                     <?php foreach ($layanans as $layanan): ?>
-                                                        <option value="<?= $layanan['id_layanan'] ?>" <?= old('id_layanan') == $layanan['id_layanan'] ? 'selected' : '' ?>><?= $layanan['name_layanan'] ?></option>
+                                                        <option value="<?= $layanan['id_layanan'] ?>" <?= old('id_layanan') == $layanan['id_layanan'] ? 'selected' : '' ?> desclayanan="<?= $layanan['desc_layanan'] ?>"><?= $layanan['name_layanan'] ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <!-- Validation Error Msg -->
@@ -87,7 +87,7 @@ function convertDay($dayNumber)
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label for="keluhan_booking" class="col-form-label">Deskripsi</label>
-                                                    <textarea name="keluhan_booking" id="" cols="30" rows="5" class="form-control <?= (validation_show_error('keluhan_booking')) ? 'is-invalid' : '' ?>"><?= old('keluhan_booking') ?></textarea>
+                                                    <textarea name="keluhan_booking" id="desc_booking" cols="30" rows="5" class="form-control <?= (validation_show_error('keluhan_booking')) ? 'is-invalid' : '' ?>"><?= old('keluhan_booking') ?></textarea>
                                                     <!-- Validation Error Msg -->
                                                     <div id="keluhan_error" class="invalid-feedback">
                                                         <?= validation_show_error('keluhan_booking') ?>
@@ -113,4 +113,12 @@ function convertDay($dayNumber)
     </div>
 </div>
 <!-- /.content-wrapper -->
+<script>
+    document.getElementById("id_layanan").onchange = function() {
+        //Print data toko di field
+        console.log(this.options[this.selectedIndex].getAttribute("desclayanan"));
+
+        document.getElementById('desc_booking').textContent = this.options[this.selectedIndex].getAttribute("desclayanan");
+    };
+</script>
 <?= $this->endSection() ?>
