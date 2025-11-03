@@ -90,7 +90,7 @@ function statusColor($status)
                                         <tr>
                                             <td>Dokter</td>
                                             <td>:</td>
-                                            <th><?= $dokter['name_user'] ?></th>
+                                            <th><?= $dokter['name_dokter'] ?></th>
                                         </tr>
                                         <tr>
                                             <td>Pasien</td>

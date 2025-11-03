@@ -5,6 +5,7 @@ namespace App\Controllers\Backoffice;
 use App\Controllers\BaseController;
 
 use App\Models\BookingModel;
+use App\Models\DokterModel;
 use App\Models\UserModel;
 use App\Models\LayananModel;
 use App\Models\SlotJadwalModel;
@@ -23,6 +24,7 @@ class BookingPasien extends BaseController
     protected $invoiceModel;
     protected $invoiceItemModel;
     protected $obatModel;
+    protected $dokterModel;
 
     public function __construct()
     {
@@ -34,6 +36,7 @@ class BookingPasien extends BaseController
         $this->invoiceModel = new InvoiceModel();
         $this->invoiceItemModel = new InvoiceItemModel();
         $this->obatModel = new ObatModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function index()
@@ -61,7 +64,7 @@ class BookingPasien extends BaseController
         $pasien = $this->userModel->where('id_user', $booking['id_user'])->first();
         $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
         $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-        $dokter = $this->userModel->where('id_user', $jadwal['id_user'])->first();
+        $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
         $invoice = $this->invoiceModel->where('id_booking', $id_booking)->first();
         $invoiceItems = $this->invoiceItemModel->where('id_invoice', $invoice['id_invoice'])->findAll();
 
