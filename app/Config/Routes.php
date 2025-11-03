@@ -86,3 +86,9 @@ $routes->group('bo-auth', function ($routes) {
     $routes->post('login/validate', 'Backoffice\Auth::loginValidate');
     $routes->get('logout', 'Backoffice\Auth::logout');
 });
+
+$routes->group('dokter-auth', function ($routes) {
+    $routes->get('login', 'Backoffice\AuthDokter::login');
+    $routes->post('login/validate', 'Backoffice\AuthDokter::loginValidate');
+    $routes->get('logout', 'Backoffice\AuthDokter::logout');
+});

@@ -4,15 +4,15 @@ namespace App\Controllers\Backoffice;
 
 use App\Controllers\BaseController;
 
-use App\Models\UserModel;
+use App\Models\DokterModel;
 
 class AuthDokter extends BaseController
 {
-    protected $userModel;
+    protected $dokterModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function login()
@@ -23,7 +23,7 @@ class AuthDokter extends BaseController
 
         $data['title'] = 'Login';
 
-        return view('Backoffice/Auth/Login', $data);
+        return view('Backoffice/Auth/LoginDokter', $data);
     }
 
     public function loginValidate()
@@ -31,14 +31,14 @@ class AuthDokter extends BaseController
         $vars = $this->request->getVar();
 
         if (!$this->validateData($vars, [
-            'email_user' => [
+            'email_dokter' => [
                 'rules' => 'trim|required|valid_email',
                 'errors' => [
                     'required' => 'Email wajib diisi!',
                     'valid_email' => 'Harus berupa email valid!',
                 ]
             ],
-            'password_user' => [
+            'password_dokter' => [
                 'rules' => 'trim|required',
                 'errors' => [
                     'required' => 'Password wajib diisi!',
@@ -46,30 +46,30 @@ class AuthDokter extends BaseController
             ],
         ])) {
             session()->setFlashdata('failed', 'Harap lengkapi form');
-            return redirect()->to('/bo-auth/login')->withInput();
+            return redirect()->to('/dokter-auth/login')->withInput();
         }
 
-        $user = $this->userModel->where('email_user', $vars['email_user'])->first();
+        $user = $this->dokterModel->where('email_dokter', $vars['email_dokter'])->first();
 
         if (!$user) {
             session()->setFlashdata('failed', 'Akun tidak dapat ditemukan');
-            return redirect()->to('/bo-auth/login');
+            return redirect()->to('/dokter-auth/login');
         } else {
-            if ($user['level_user'] == 'Pasien') {
+            if ($user['level_dokter'] != 'Dokter') {
                 session()->setFlashdata('failed', 'Akun tidak dapat ditemukan');
                 return redirect()->to('/');
             } else {
-                if (!password_verify($vars['password_user'], $user['password_user'])) {
+                if (!password_verify($vars['password_dokter'], $user['password_dokter'])) {
                     session()->setFlashdata('failed', 'Password salah');
-                    return redirect()->to('/bo-auth/login');
+                    return redirect()->to('/dokter-auth/login')->withInput();
                 } else {
                     session()->set('logged_in_bo', true);
-                    session()->set('id_user', $user['id_user']);
-                    session()->set('email_user', $user['email_user']);
-                    session()->set('name_user', $user['name_user']);
-                    session()->set('level_user', $user['level_user']);
+                    session()->set('id_user', $user['id_dokter']);
+                    session()->set('email_user', $user['email_dokter']);
+                    session()->set('name_user', $user['name_dokter']);
+                    session()->set('level_user', $user['level_dokter']);
 
-                    session()->setFlashdata('success', 'Selamat datang ' . $user['name_user']);
+                    session()->setFlashdata('success', 'Selamat datang ' . $user['name_dokter']);
                     return redirect()->to('/backoffice')->withInput();
                 }
             }

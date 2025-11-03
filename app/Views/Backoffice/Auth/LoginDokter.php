@@ -10,36 +10,36 @@
         <div class="card-body">
             <p class="login-box-msg">Log In</p>
 
-            <form action="/bo-auth/login/validate" method="post" enctype="multipart/form-data">
+            <form action="/dokter-auth/login/validate" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control <?= (validation_show_error('email_user')) ? 'is-invalid' : '' ?>" name="email_user" placeholder="Email">
+                    <input type="text" class="form-control <?= (validation_show_error('email_dokter')) ? 'is-invalid' : '' ?>" name="email_dokter" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                     <!-- Validation Error Msg -->
-                    <div id="email_user_error" class="invalid-feedback">
-                        <?= validation_show_error('email_user') ?>
+                    <div id="email_dokter_error" class="invalid-feedback">
+                        <?= validation_show_error('email_dokter') ?>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control <?= (validation_show_error('password_user')) ? 'is-invalid' : '' ?>" name="password_user" placeholder="Password">
+                    <input type="password" class="form-control <?= (validation_show_error('password_dokter')) ? 'is-invalid' : '' ?>" name="password_dokter" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
                     <!-- Validation Error Msg -->
-                    <div id="password_user_error" class="invalid-feedback">
-                        <?= validation_show_error('password_user') ?>
+                    <div id="password_dokter_error" class="invalid-feedback">
+                        <?= validation_show_error('password_dokter') ?>
                     </div>
                 </div>
                 <hr>
                 <div class="col-12">
                     <button type="submit" class="btn bg-teal btn-block rounded-pill">Sign In</button>
-                    <a href="/dokter-auth/login" class="btn btn-outline-primary btn-block rounded-pill">Sign In Dokter</a>
+                    <a href="/bo-auth/login" class="btn btn-outline-info btn-block rounded-pill">Sign In User</a>
                 </div>
             </form>
 
