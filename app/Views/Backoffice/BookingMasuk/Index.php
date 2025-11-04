@@ -110,8 +110,8 @@ function statusColor($status)
                                                 <td><?= $booking['code_booking'] ?></td>
                                                 <td><?= date('d F Y', strtotime($booking['date_booking'])) ?></td>
                                                 <td><?= date('H:i', strtotime($booking['date_booking'])) ?></td>
-                                                <td><?= $pasien['name_user'] ?></td>
-                                                <td><?= $dokter['name_user'] ?></td>
+                                                <td><?= $pasien['name_pasien'] ?></td>
+                                                <td><?= $dokter['name_dokter'] ?></td>
                                                 <td><span class="badge bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></td>
                                                 <td>
                                                     <a href="#" data-toggle="modal" data-target="#detail-modal<?= $booking['id_booking'] ?>" class="btn bg-teal" title="Detail"><i class="fas fa-eye"></i></a>
