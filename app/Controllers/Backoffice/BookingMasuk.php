@@ -5,6 +5,7 @@ namespace App\Controllers\Backoffice;
 use App\Controllers\BaseController;
 
 use App\Models\BookingModel;
+use App\Models\DokterModel;
 use App\Models\UserModel;
 use App\Models\LayananModel;
 use App\Models\SlotJadwalModel;
@@ -17,6 +18,7 @@ class BookingMasuk extends BaseController
     protected $layananModel;
     protected $slotJadwalModel;
     protected $jadwalModel;
+    protected $dokterModel;
 
     public function __construct()
     {
@@ -25,6 +27,7 @@ class BookingMasuk extends BaseController
         $this->layananModel = new LayananModel();
         $this->slotJadwalModel = new SlotJadwalModel();
         $this->jadwalModel = new JadwalModel();
+        $this->dokterModel = new DokterModel();
     }
 
     public function index()
@@ -38,6 +41,7 @@ class BookingMasuk extends BaseController
         $data['layananModel'] = $this->layananModel;
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
+        $data['dokterModel'] = $this->dokterModel;
         // Ambil data booking list
         $data['bookings'] = $this->bookingModel->where('DATE(date_booking) >=', date("Y-m-d"))->orderBy('date_booking', 'ASC')->findAll();
 
