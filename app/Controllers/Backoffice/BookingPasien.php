@@ -13,6 +13,7 @@ use App\Models\JadwalModel;
 use App\Models\InvoiceModel;
 use App\Models\InvoiceItemModel;
 use App\Models\ObatModel;
+use App\Models\PasienModel;
 
 class BookingPasien extends BaseController
 {
@@ -25,6 +26,7 @@ class BookingPasien extends BaseController
     protected $invoiceItemModel;
     protected $obatModel;
     protected $dokterModel;
+    protected $pasienModel;
 
     public function __construct()
     {
@@ -37,6 +39,7 @@ class BookingPasien extends BaseController
         $this->invoiceItemModel = new InvoiceItemModel();
         $this->obatModel = new ObatModel();
         $this->dokterModel = new DokterModel();
+        $this->pasienModel = new PasienModel();
     }
 
     public function index()
@@ -50,6 +53,8 @@ class BookingPasien extends BaseController
         $data['layananModel'] = $this->layananModel;
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
+        $data['dokterModel'] = $this->dokterModel;
+        $data['pasienModel'] = $this->pasienModel;
         // Ambil data booking list
         $data['bookings'] = $this->bookingModel->where('DATE(date_booking) =', date("Y-m-d"))->where('status_booking', 'Confirmed')->orderBy('date_booking', 'ASC')->findAll();
         // Ambil data booking yang sedang dalam perawatan
@@ -61,7 +66,7 @@ class BookingPasien extends BaseController
     public function detail($id_booking)
     {
         $booking = $this->bookingModel->where('id_booking', $id_booking)->first();
-        $pasien = $this->userModel->where('id_user', $booking['id_user'])->first();
+        $pasien = $this->pasienModel->where('id_pasien', $booking['id_user'])->first();
         $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
         $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
         $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
@@ -77,6 +82,7 @@ class BookingPasien extends BaseController
         $data['layananModel'] = $this->layananModel;
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
+        $data['pasienModel'] = $this->pasienModel;
         // Ambil data booking detail
         $data['booking'] = $booking;
         $data['pasien'] = $pasien;

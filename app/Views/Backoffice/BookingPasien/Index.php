@@ -76,14 +76,14 @@ function statusColor($status)
                 <div class="col-12">
                     <?php if ($bookingPerawatan): ?>
                         <?php
-                        $pasienPerawatan = $userModel->where('id_user', $bookingPerawatan['id_user'])->first();
+                        $pasienPerawatan = $pasienModel->where('id_pasien', $bookingPerawatan['id_user'])->first();
                         $layananPerawatan = $layananModel->where('id_layanan', $bookingPerawatan['id_layanan'])->first();
                         ?>
                         <div class="card rounded-pill bg-primary" style="padding-left: 50px; padding-right: 50px;">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4><span class="badge bg-teal"><?= $layananPerawatan['name_layanan'] ?></span>&nbsp; <?= $pasienPerawatan['name_user'] ?></h4>
+                                        <h4><span class="badge bg-teal"><?= $layananPerawatan['name_layanan'] ?></span>&nbsp; <?= $pasienPerawatan['name_pasien'] ?></h4>
                                         <p>Keluhan: <?= $bookingPerawatan['keluhan_booking'] ?></p>
                                         <p>
                                             <span class="badge bg-warning"><?= date('d F Y', strtotime($bookingPerawatan['date_booking'])) ?></span>
@@ -104,13 +104,13 @@ function statusColor($status)
                 <div class="col-12">
                     <?php foreach ($bookings as $booking): ?>
                         <?php
-                        $pasien = $userModel->where('id_user', $booking['id_user'])->first();
+                        $pasien = $pasienModel->where('id_pasien', $booking['id_user'])->first();
                         $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
                         $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                         $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-                        $dokter = $userModel->where('id_user', $jadwal['id_user'])->first();
+                        $dokter = $dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
                         ?>
-                        <?php if ($dokter['id_user'] == session('id_user')): ?>
+                        <?php if ($dokter['id_dokter'] == session('id_user')): ?>
                             <div class="card rounded-pill" style="padding-left: 50px; padding-right: 50px;">
                                 <div class="card-body">
                                     <div class="row">
