@@ -109,7 +109,7 @@ function statusColor($status)
                                                     <div class="user-block">
                                                         <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="user image">
                                                         <span class="username">
-                                                            <a href="#" class="text-teal"><?= $dokter['name_user'] ?></a>
+                                                            <a href="#" class="text-teal"><?= $dokter['name_dokter'] ?></a>
                                                             <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
                                                         </span>
                                                         <span class="description"><?= date('l, d F Y', strtotime($booking['date_booking'])) ?> - <?= date('H:i', strtotime($slotJadwal['time_slot'])) ?></span>
