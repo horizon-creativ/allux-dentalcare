@@ -38,8 +38,8 @@ class Dashboard extends BaseController
         $data['menuGroup'] = '';
         $data['menu'] = 'Dashboard';
 
-        $data['jmlPasien'] = $this->pasienModel->where('level_user', 'Pasien')->countAllResults();
-        $data['jmlDokter'] = $this->dokterModel->where('level_user', 'Dokter')->countAllResults();
+        $data['jmlPasien'] = $this->pasienModel->where('level_pasien', 'Pasien')->countAllResults();
+        $data['jmlDokter'] = $this->dokterModel->where('level_dokter', 'Dokter')->countAllResults();
         $data['jmlBooking'] = $this->bookingModel->where('status_booking !=', 'Cancelled')->countAllResults();
         $data['jmlLayanan'] = $this->layananModel->countAllResults();
         $data['jmlObat'] = $this->obatModel->countAllResults();
