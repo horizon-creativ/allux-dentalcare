@@ -318,7 +318,7 @@ class BookingPasien extends BaseController
                 $layanan = $this->layananModel->where('id_layanan', $booking['id_layanan'])->first();
                 $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                 $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-                $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_user'])->first();
+                $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_dokter'])->first();
 
                 $invoiceData = [
                     'id_booking' => $id_booking,
