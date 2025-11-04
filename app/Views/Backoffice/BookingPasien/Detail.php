@@ -95,7 +95,7 @@ function statusColor($status)
                                         <tr>
                                             <td>Pasien</td>
                                             <td>:</td>
-                                            <th><?= $pasien['name_user'] ?></th>
+                                            <th><?= $pasien['name_pasien'] ?></th>
                                         </tr>
                                         <tr>
                                             <td>Tanggal</td>
