@@ -5,8 +5,10 @@ namespace App\Controllers\Backoffice;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\BookingModel;
+use App\Models\DokterModel;
 use App\Models\LayananModel;
 use App\Models\ObatModel;
+use App\Models\PasienModel;
 use App\Models\PaymentModel;
 
 class Dashboard extends BaseController
@@ -16,6 +18,8 @@ class Dashboard extends BaseController
     protected $layananModel;
     protected $obatModel;
     protected $paymentModel;
+    protected $dokterModel;
+    protected $pasienModel;
 
     public function __construct()
     {
@@ -24,6 +28,8 @@ class Dashboard extends BaseController
         $this->layananModel = new LayananModel();
         $this->obatModel = new ObatModel();
         $this->paymentModel = new PaymentModel();
+        $this->dokterModel = new DokterModel();
+        $this->pasienModel = new PasienModel();
     }
 
     public function index()
@@ -32,8 +38,8 @@ class Dashboard extends BaseController
         $data['menuGroup'] = '';
         $data['menu'] = 'Dashboard';
 
-        $data['jmlPasien'] = $this->userModel->where('level_user', 'Pasien')->countAllResults();
-        $data['jmlDokter'] = $this->userModel->where('level_user', 'Dokter')->countAllResults();
+        $data['jmlPasien'] = $this->pasienModel->where('level_user', 'Pasien')->countAllResults();
+        $data['jmlDokter'] = $this->dokterModel->where('level_user', 'Dokter')->countAllResults();
         $data['jmlBooking'] = $this->bookingModel->where('status_booking !=', 'Cancelled')->countAllResults();
         $data['jmlLayanan'] = $this->layananModel->countAllResults();
         $data['jmlObat'] = $this->obatModel->countAllResults();
