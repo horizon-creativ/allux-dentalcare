@@ -121,7 +121,7 @@ function statusColor($status)
                                         $no = 1;
                                         foreach ($bookings as $booking): ?>
                                             <?php
-                                            $pasien = $userModel->where('id_user', $booking['id_user'])->first();
+                                            $pasien = $pasienModel->where('id_pasien', $booking['id_user'])->first();
                                             $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
                                             $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                                             $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
@@ -132,7 +132,7 @@ function statusColor($status)
                                                 <td><?= $booking['code_booking'] ?></td>
                                                 <td><?= date('d F Y', strtotime($booking['date_booking'])) ?></td>
                                                 <td><?= date('H:i', strtotime($booking['date_booking'])) ?></td>
-                                                <td><?= $pasien['name_user'] ?></td>
+                                                <td><?= $pasien['name_pasien'] ?></td>
                                                 <td><?= $dokter['name_dokter'] ?></td>
                                                 <td><?= $layanan['name_layanan'] ?></td>
                                                 <td><span class="badge bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></td>
