@@ -171,7 +171,7 @@ function statusColor($status)
                                                                     <ul class="list-group list-group-unbordered mb-3">
                                                                         <li class="list-group-item">
                                                                             <b>Dokter</b>
-                                                                            <div class="float-right"><?= $dokter['name_user'] ?></div>
+                                                                            <div class="float-right"><?= $dokter['name_dokter'] ?></div>
                                                                         </li>
                                                                         <li class="list-group-item">
                                                                             <b>Hari</b>
