@@ -314,11 +314,11 @@ class BookingPasien extends BaseController
                 return redirect()->to('/backoffice/booking-pasien')->withInput();
             } else {
                 $booking = $this->bookingModel->where('id_booking', $id_booking)->first();
-                $pasien = $this->userModel->where('id_user', $booking['id_user'])->first();
+                $pasien = $this->pasienModel->where('id_pasien', $booking['id_user'])->first();
                 $layanan = $this->layananModel->where('id_layanan', $booking['id_layanan'])->first();
                 $slotJadwal = $this->slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                 $jadwal = $this->jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();
-                $dokter = $this->userModel->where('id_user', $jadwal['id_user'])->first();
+                $dokter = $this->dokterModel->where('id_dokter', $jadwal['id_user'])->first();
 
                 $invoiceData = [
                     'id_booking' => $id_booking,
@@ -326,10 +326,10 @@ class BookingPasien extends BaseController
                     'code_booking' => $booking['code_booking'],
                     'date_booking' => $booking['date_booking'],
                     'keluhan_booking' => $booking['keluhan_booking'],
-                    'name_dokter' => $dokter['name_user'],
-                    'phone_dokter' => $dokter['phone_user'],
-                    'name_pasien' => $pasien['name_user'],
-                    'phone_pasien' => $pasien['phone_user'],
+                    'name_dokter' => $dokter['name_dokter'],
+                    'phone_dokter' => $dokter['phone_dokter'],
+                    'name_pasien' => $pasien['name_pasien'],
+                    'phone_pasien' => $pasien['phone_pasien'],
                     'status_invoice' => 'Pending',
                 ];
 
