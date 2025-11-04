@@ -99,7 +99,7 @@ function statusColor($status)
                                         $no = 1;
                                         foreach ($bookings as $booking): ?>
                                             <?php
-                                            $pasien = $userModel->where('id_user', $booking['id_user'])->first();
+                                            $pasien = $pasienModel->where('id_user', $booking['id_user'])->first();
                                             $layanan = $layananModel->where('id_layanan', $booking['id_layanan'])->first();
                                             $slotJadwal = $slotJadwalModel->where('id_slot_jadwal', $booking['id_slot_jadwal'])->first();
                                             $jadwal = $jadwalModel->where('id_jadwal', $slotJadwal['id_jadwal'])->first();

@@ -10,6 +10,7 @@ use App\Models\UserModel;
 use App\Models\LayananModel;
 use App\Models\SlotJadwalModel;
 use App\Models\JadwalModel;
+use App\Models\PasienModel;
 
 class BookingMasuk extends BaseController
 {
@@ -19,6 +20,7 @@ class BookingMasuk extends BaseController
     protected $slotJadwalModel;
     protected $jadwalModel;
     protected $dokterModel;
+    protected $pasienModel;
 
     public function __construct()
     {
@@ -28,6 +30,7 @@ class BookingMasuk extends BaseController
         $this->slotJadwalModel = new SlotJadwalModel();
         $this->jadwalModel = new JadwalModel();
         $this->dokterModel = new DokterModel();
+        $this->pasienModel = new PasienModel();
     }
 
     public function index()
@@ -42,6 +45,7 @@ class BookingMasuk extends BaseController
         $data['slotJadwalModel'] = $this->slotJadwalModel;
         $data['jadwalModel'] = $this->jadwalModel;
         $data['dokterModel'] = $this->dokterModel;
+        $data['pasienModel'] = $this->pasienModel;
         // Ambil data booking list
         $data['bookings'] = $this->bookingModel->where('DATE(date_booking) >=', date("Y-m-d"))->orderBy('date_booking', 'ASC')->findAll();
 
