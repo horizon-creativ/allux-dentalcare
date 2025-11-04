@@ -115,7 +115,7 @@ function statusColor($status)
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4><span class="badge bg-teal"><?= $layanan['name_layanan'] ?></span>&nbsp; <?= $pasien['name_user'] ?></h4>
+                                            <h4><span class="badge bg-teal"><?= $layanan['name_layanan'] ?></span>&nbsp; <?= $pasien['name_pasien'] ?></h4>
                                             <p>Keluhan: <?= $booking['keluhan_booking'] ?></p>
                                             <p>
                                                 <span class="badge bg-blue"><?= date('d F Y', strtotime($booking['date_booking'])) ?></span>
