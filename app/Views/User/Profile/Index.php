@@ -53,7 +53,7 @@ function statusColor($status)
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="/uploads/img_user/<?= $pasien['img_pasien'] ?>"
+                                        src="/uploads/img_user/default_user.png"
                                         alt="User profile picture">
                                 </div>
 
@@ -107,7 +107,7 @@ function statusColor($status)
                                                 <!-- Booking -->
                                                 <div class="post">
                                                     <div class="user-block">
-                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="user image">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/default_user.png" alt="user image">
                                                         <span class="username">
                                                             <a href="#" class="text-teal"><?= $dokter['name_dokter'] ?></a>
                                                             <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>
@@ -154,7 +154,7 @@ function statusColor($status)
                                                 <!-- Booking -->
                                                 <div class="post">
                                                     <div class="user-block">
-                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="user image">
+                                                        <img class="img-circle img-bordered-sm" src="/uploads/img_dokter/default_user.png" alt="user image">
                                                         <span class="username">
                                                             <a href="#" class="text-teal"><?= $dokter['name_dokter'] ?></a>
                                                             <a href="#" class="float-right"><span class="badge rounded-pill px-3 bg-<?= statusColor($booking['status_booking']) ?>"><?= $booking['status_booking'] ?></span></a>

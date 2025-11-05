@@ -45,7 +45,7 @@
                                                 </ul>
                                             </div>
                                             <div class="col-5 text-center">
-                                                <img src="/uploads/img_dokter/<?= $dokter['img_dokter'] ?>" alt="dokter-avatar" class="img-circle img-fluid">
+                                                <img src="/uploads/img_dokter/default_user.png" alt="dokter-avatar" class="img-circle img-fluid">
                                             </div>
                                         </div>
                                     </div>
