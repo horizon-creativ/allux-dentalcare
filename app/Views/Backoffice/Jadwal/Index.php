@@ -39,7 +39,7 @@
                                                 <h2 class="lead mb-3"><b><?= $dokter['name_dokter'] ?></b></h2>
                                                 <!-- <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                    <li class="small mb-3"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?= $dokter['address_dokter'] ?></li>
+                                                    <li class="small mb-3"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span></li>
 
                                                     <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> No. Telp: <?= $dokter['phone_dokter'] ?></li>
                                                 </ul>
